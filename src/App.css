@@ -1,0 +1,27 @@
+*{
+  box-sizing: border-box;
+}
+.list{
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  width: 100%;
+}
+.list th, .list td{
+  padding: 10px;
+  border: 1px dashed #ccc;
+  background-color: white;
+}
+.list2{
+  border-collapse: collapse;
+  border: none;
+  width: 100%;
+}
+.list2 th, .list2 td{
+  padding: 10px;
+  border: none;
+  border-collapse: collapse;
+  background-color: white;
+}
+.bg-inf{
+  background-color: #067A7A !important;
+}
