@@ -34,23 +34,25 @@ const Header = () => {
                 <div className="col-12 bg-inf mb-5">
                     <div className="col-12">
                         <div className="row py-3">
-                            <div className="col-4">
+                            <div className="col-3">
                                 <img className="ms-5" src={logo} alt="" width={'100'} />
                             </div>
-                            <div className="col-4">
-                            <h2 className="text-center text-white">Unity</h2>    
+                            <div className="col-6">
+                            <h1 className="text-center text-white" style={{fontSize : '30pt'}}>Жилищный кооператив</h1>    
                             </div>
-                            <div className="col-4 text-end">
-                                <a className="btn btn-light border" href="/profile">Личный кабинет</a>
-                                <a className="btn btn-light border ms-2" onClick={LogOut} href="#">Выйти из профиля</a>
+                            <div className="col-3 text-end">
+                                <a className="badge border bg-light text-inf px-4" href="/profile">Личный кабинет</a>
+                                <a className="badge border bg-light text-inf px-4 ms-2" onClick={LogOut} href="#">Выйти из профиля</a>
                             </div>
                         </div>
                     </div>
-                    <div className="col-12 d-flex justify-content-around py-4">
-                        <a className="btn btn-light border" href="/chat">Общий чат</a>
-                        <a className="btn btn-light border" href="/list">Список</a>
-                        <a className="btn btn-light border" href="/about-us">Информация о компании</a>
-                        <a className="btn btn-light border" href="/content">Видео и фото</a>
+                    <div className="col-12 d-flex justify-content-center py-4">
+                        <div className="col-8 d-flex justify-content-around">
+                        <a className="badge border-dark bg-light text-inf px-5" href="/chat">Общий чат</a>
+                        <a className="badge border bg-light text-inf px-5" href="/list">Список</a>
+                        <a className="badge border bg-light text-inf px-5" href="/about-us">Информация о компании</a>
+                        <a className="badge border bg-light text-inf px-5" href="/content">Видео и фото</a>
+                        </div>
                     </div>
                 </div>
             </div>

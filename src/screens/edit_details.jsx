@@ -128,8 +128,8 @@ const Edit = () => {
         console.log('data post', data);
         updateBalance(main,service);
         if(data.data.status == 200){
-            
             message.success('Данные сохранены!',5);
+            window.location.href = '/invoice';
         }else{
             message.warning('Что-то пошло не так :(',5);
         }
@@ -172,16 +172,16 @@ const Edit = () => {
         <>
         <Header/>
             {user != null ?
-            <div className="container-fluid">
+            <div className="container">
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-4 pe-5">
                         <input className='form-control' type="file" name="" id="" onChange={(e)=>setAvatar(e.target.files[0])} />
                         <p><span className='text-danger'>*</span>Загрузите ваше фото</p>
                     </div>
                     <div className="col-8">
                         <div className="row">
                              <div className="col-12">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia natus alias, debitis temporibus commodi earum vel nam iure iusto, praesentium reprehenderit. Sapiente maxime magni non excepturi at sint, debitis aliquid.
+                                <strong>Здесь вы заполняете личные данные</strong>
                              </div>
                              <div className="col-12">
                                 <label className='mt-2'><span className='text-danger'>*</span>Имя</label>
@@ -206,8 +206,10 @@ const Edit = () => {
                     </div>
                 </div>
                 <div className="row mt-3">
-                        <div className="col-12 mb-3">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Illo dignissimos dolorum veniam iste voluptas ex reprehenderit sunt a. Delectus deleniti repellat consequatur ipsum totam praesentium maiores natus facilis consequuntur ullam!
+                        <div className="col-12 my-3 text-center border border-dark-subtle">
+                            <strong>Необходимо, чтобы данные, которые вы заполнили,<br />
+                            соответствовали вашему паспорту
+                            </strong>
                         </div>
                         <div className="col-6">
                         <label className='mt-2'><span className='text-danger'>*</span>Фото паспорта с передней стороны</label>
@@ -254,8 +256,15 @@ const Edit = () => {
                             <label htmlFor="" className='text-dark mt-3'><b>Вперед сумма</b></label>
                             <input defaultValue={user.balance > 0 ? user.balance : 0} type="text" className='form-control' onChange={(e)=>{setBalance(e.target.value)}} />
                         </div>
-                        <div className="col-12 mt-3">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Temporibus non accusantium ex, sint dolores, consequuntur quis, porro hic libero voluptas sed dolorum quam blanditiis! Doloribus voluptates et ab nobis laborum.
+                        <div className="col-12 mt-3 border border-dark-subtle">
+                            <strong>
+                                После заполнения ваших данных появится файл, показанный ниже. <br /> 
+                                Загрузить<br />
+                                Есть сертификат. <br />
+                                Ввести свидетельство в юридическую силу и указать 
+                                согласование условий и оплаты. <br /> <br /> 
+                                Свяжитесь с нами по нашему адресу или онлайн.
+                            </strong>
                         </div>
                         <div className="col-12 mt-3">
                             <div className="row">
@@ -263,8 +272,7 @@ const Edit = () => {
                                     <input type="date" name="" id="" className='form-control' />
                                 </div>
                                 <div className="col-4">
-                                    <b>Скачать договор</b><br />
-                                    <a href="javascript:(print());" className='btn btn-outline-secondary'>Печать</a>
+                                    
                                 </div>
                                 <div className="col-4">
                                     <button className='btn btn-warning' onClick={postDetails}>Сохранить</button>

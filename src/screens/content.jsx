@@ -31,6 +31,7 @@ const Info = () => {
     }
     useEffect(() => {
         getVideos();
+        getPhotos();
 
     }, [])
     return (

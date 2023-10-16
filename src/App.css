@@ -1,13 +1,15 @@
 *{
   box-sizing: border-box;
+  font-size: 13px;
 }
 .list{
   border: 1px solid #ccc;
   border-collapse: collapse;
   width: 100%;
+  font-size: 12px;
 }
 .list th, .list td{
-  padding: 10px;
+  padding: 5px;
   border: 1px dashed #ccc;
   background-color: white;
 }
@@ -23,5 +25,8 @@
   background-color: white;
 }
 .bg-inf{
-  background-color: #067A7A !important;
+  background-color:#067A7A  !important;
+}
+.text-inf{
+  color: #067A7A  !important;
 }

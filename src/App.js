@@ -12,6 +12,8 @@ import 'moment/locale/ru';
 import Admin from './screens/admin';
 import AdminConsole from './screens/admin_console';
 import Info from './screens/content';
+import About from './screens/about';
+import Invoice from './screens/invoice';
 function App() {
   return (
     <div className='container-fluid'>
@@ -27,6 +29,8 @@ function App() {
                   <Route path='/admin' element={<Admin/>} />
                   <Route path='/admin-console' element={<AdminConsole/>} />
                   <Route path='/content' element={<Info/>} />
+                  <Route path='/about-us' element={<About/>} />
+                  <Route path='/invoice' element={<Invoice/>} />
               </Routes>
         </BrowserRouter>
     </div>

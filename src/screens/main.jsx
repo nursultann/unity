@@ -24,7 +24,7 @@ const Main = () => {
                 }
             });
             console.log('local', data);
-            if (data.data.status == 200) {
+            if (data.data.status === 200) {
                 setUserDetails(data.data.user[0]);
             }
         }
@@ -38,20 +38,33 @@ const Main = () => {
             url: url + 'table-users',
         })
         console.log('table data', data);
-        if (data.data.status == 200) {
+        if (data.data.status === 200) {
             setTableData(data.data.users);
         }
     }
     useEffect(() => {
         getTableDetails();
+        getPainmentReports();
     }, []);
     const [searchResult, setSearchResult] = useState(null);
     const Search = (value) => {
-        const search = tableData.filter((i) => i.name == value || i.lastname == value);
+        const search = tableData.filter((i) => i.name === value || i.lastname === value);
         if (search.length > 0) {
             setSearchResult(search);
         } else {
             setSearchResult(null);
+        }
+    }
+    const [painment, setPainment] = useState(null);
+    const getPainmentReports = async () => {
+        const data = await axios({
+            method: 'get',
+            url: url + 'report-painment'
+        });
+        if (data.data.status === 200) {
+            setPainment(data.data.report_painment);
+        } else {
+            setPainment(null);
         }
     }
     return (
@@ -62,7 +75,9 @@ const Main = () => {
                     <div className="col-8">
                         <div className="row">
                             <div className="col-12">
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cupiditate voluptatem pariatur in consectetur et molestiae aspernatur provident fugiat minima, maiores quidem. Cumque facilis magnam alias voluptas quis voluptates sapiente optio.
+                                В этот список вошли граждане, стоящие в очереди на получение жилой недвижимости.
+                                Для того, чтобы встать в очередь, необходима справка об отсутствии недвижимости на Ваше имя.
+                                Если вы состоите в браке, необходимо свидетельство о браке.
                             </div>
                             <div className="col-12 py-4">
                                 <input type="search" placeholder="Поиск" className="form-control" onChange={(e) => { Search(e.target.value) }} name="" id="" />
@@ -88,19 +103,16 @@ const Main = () => {
                                                     Вперед
                                                 </th>
                                             </tr>
-
                                             {searchResult.map((item) =>
                                                 <tr>
                                                     <td>{item.id}</td>
-                                                    <td>{item.lastname + ' ' + item.name + ' ' + (item.middname != undefined ? item.middname : '')}</td>
+                                                    <td>{item.lastname + ' ' + item.name + ' ' + (item.middname !== undefined ? item.middname : '')}</td>
                                                     <td>2000</td>
                                                     <td>20000</td>
                                                     <td>{item.balance}</td>
                                                 </tr>
                                             )
                                             }
-
-
                                         </table>
                                     </div>
                                 </>
@@ -132,7 +144,7 @@ const Main = () => {
                                             {tableData.map((item) =>
                                                 <tr>
                                                     <td>{item.id}</td>
-                                                    <td>{item.lastname + ' ' + item.name + ' ' + (item.middname != undefined ? item.middname : '')}</td>
+                                                    <td>{item.lastname + ' ' + item.name + ' ' + (item.middname !== undefined ? item.middname : '')}</td>
                                                     <td>2000</td>
                                                     <td>20000</td>
                                                     <td>{item.balance}</td>
@@ -163,16 +175,16 @@ const Main = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-4">
+                    <div className="col-4 ps-5">
                         <div className="row">
                             <div className="col-12">
-                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit, iste, aspernatur labore illum expedita voluptas dignissimos rerum atque iure maiores autem dicta ad in officia quaerat nesciunt molestias rem saepe!
+                            <p>Список граждан, владеющих недвижимостью через платформу</p>
                             </div>
                             <div className="col-12">
                                 <input type="search" placeholder="Поиск" className="form-control" src="" alt="" />
                             </div>
                             <div className="col-12 py-4">
-                                <table className="list2">
+                                <table className="list">
                                     <tr>
                                         <th>
                                             №
@@ -181,6 +193,23 @@ const Main = () => {
                                             ФИО
                                         </th>
                                     </tr>
+                                    {painment != null ?
+                                        <>
+                                            {painment.map((item) =>
+                                                <tr>
+                                                    <td>{item.id}</td>
+                                                    <td>{item.lastname + ' ' + item.name}</td>
+                                                </tr>
+                                            )
+                                            }
+
+                                        </>
+                                        :
+                                        <>
+
+
+                                        </>
+                                    }
                                 </table>
                             </div>
                         </div>

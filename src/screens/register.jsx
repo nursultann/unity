@@ -100,15 +100,42 @@ const Register = () => {
     return (
         <>
             <div className="row">
+                <div className="col-12 bg-inf p-4 mb-2">
+                </div>
                 <div className="col-12 d-flex justify-content-center">
                     <img src={RegLogo} alt="" width={100} />
+                </div>
+                <div className="col-12 px-5 mt-4">
+                    - 01.10.2023 компания официально прошла гос.регистрацию. Платформа будет работать только в сфере недвижимости
+                    <br />
+                    - Это платформа является не коммерческой организацией, а, систематическим кооперативом для  удобства граждан
+                    Кыргызской республики в приобретении недвижимости.
+                    <br />
+                    - Очередь платформы зависит от финансового состояние человека. Т е чем больше внесли сумму, тем очередь двинется в перед.
+                    <br />
+                    - На веб сайте можно увидеть куда и на что тратиться ваш первоначальный взнос.
+                    Вместе с этим, каждый человек после регистрации может уточнить когда и с каким бюджетом может приобрести недвижимость.
+                    <br />
+                    - С помощью этой платформы, граждане Кыргызской республики которые не имеют недвижимость,
+                    соблюдая требовании и ограничении могут зарегистрироваться для приобретения недвижимости..
+                    <br />
+                    - Со дня регистрации, на веб сайте вы можете онлайн контролировать  свое финансовое состояние и управлять очередью.
+                    <br />
+                    - Общий доход компании и приобретение недвижимости 100% финансируется  за счет тех кто в очередь
+                    <br />
+                    - Кооперативы делятся на 2: 1) коммерческая 2) некоммерческая. 1) основная цель коммерческого кооператив заработать
+                    ( ЖККР 82-статья пункт-1) : производственный и регистрационный кооператив. Например: сельскохозяйственный кооператив,
+                    финансовый кооператив и т д. 2) а цель некоммерческого кооператив не заработать для себя и не поделить доход
+                    между участниками ( жккр 82-Ст п-1) а, работать по уставу.  Некоммерческих кооператив по другому еще называют ….
+                    <br />
+                    - Чтобы по подробнее ознакомиться с нашей платформой пройдите регистрацию
                 </div>
             </div>
             {state ?
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-12 d-flex justify-content-center" style={{ marginTop: "100px" }}>
-                            <div className="col-5 text-center bg-inf text-white p-3 px-5">
+                            <div className="col-4 text-center bg-inf text-white p-3 px-5">
                                 <h1 className="text-center">Регистрация</h1>
                                 <input type="text" placeholder="Имя" className="form-control mt-4" onChange={(e) => setName(e.target.value)} />
                                 <input type="text" placeholder="Фамилия" className="form-control mt-4" onChange={(e) => setLastName(e.target.value)} />
@@ -128,7 +155,7 @@ const Register = () => {
                         <div className="col-12 d-flex justify-content-center" style={{ marginTop: "100px" }}>
                             {final == false ?
                                 <>
-                                    <div className="col-6 text-center bg-inf text-white p-3 px-5">
+                                    <div className="col-4 text-center bg-inf text-white p-3 px-5">
                                         <h1 className="text-center">Номер телефона</h1>
                                         <input type="number" placeholder="Номер телефона" className="form-control mt-4" onChange={(e) => setPhone(e.target.value)} />
                                         <br />
