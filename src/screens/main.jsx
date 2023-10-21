@@ -48,7 +48,7 @@ const Main = () => {
     }, []);
     const [searchResult, setSearchResult] = useState(null);
     const Search = (value) => {
-        const search = tableData.filter((i) => i.name === value || i.lastname === value);
+        const search = tableData.filter((i) => i.name == value || i.lastname == value || i.name.toLowerCase() == value || i.lastname.toLowerCase() == value);
         if (search.length > 0) {
             setSearchResult(search);
         } else {

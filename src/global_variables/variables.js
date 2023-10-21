@@ -1,1 +1,1 @@
-export const url = "http://unity.kg/api/";
+export const url = "https://unity.kg/api/api/";

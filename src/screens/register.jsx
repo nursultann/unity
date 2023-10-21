@@ -26,11 +26,13 @@ const Register = () => {
         });
         console.log('phone check', check);
         if (check.data.status == 404) {
-            if (phone === "") return;
+            // if (phone != "") return;
             auth.signInWithPhoneNumber(`+${phone}`, window.verify).then((result) => {
                 setFinal(result);
                 console.log('result auth', result);
                 message.success('Код потверждения отправлен!', 10);
+            }).catch((err) => {
+                console.log('error', err);
             })
         } else {
             message.warning('Такой номер уже существует!', 10);
@@ -166,7 +168,7 @@ const Register = () => {
                                 </>
                                 :
                                 <>
-                                    <div className="col-5 text-center bg-info text-white p-3 px-5">
+                                    <div className="col-5 text-center bg-inf text-white p-3 px-5">
                                         <h1 className="text-center">Подтвердить код подтверждения</h1>
                                         <input type="number" placeholder="Код подтверждения" defaultValue='' className="form-control mt-4" onChange={(e) => setCode(e.target.value)} />
                                         <br />

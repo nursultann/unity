@@ -5,9 +5,9 @@ import { firebase,auth } from "../firebase/firebase-config";
 import { url } from "../global_variables/variables";
 
 const Forgot = ()=>{
-    const [phone, setPhone] = useState();
-    const [password, setPassword] = useState();
-    const [name, setName] = useState();
+    const [phone, setPhone] = useState(null);
+    const [password, setPassword] = useState(null);
+    const [chechPassword, setCheckPassword] = useState(null);
     const [lastName, setLastName] = useState();
     const [passport, setPassport] = useState();
     const [email, setEmail] = useState();
@@ -59,7 +59,7 @@ const Forgot = ()=>{
     }
     const RegisterUser = async (phone, password) => {
         const data = await axios({
-            method: 'get',
+            method: 'update',
             url: url + 'forgot-password',
             params: {
                 phone: phone,
@@ -69,10 +69,11 @@ const Forgot = ()=>{
         })
         console.log('forgot-password', data);
         if (data.data.status == 200) {
-            localStorage.setItem('token',data.data.user[0].uid);
+            message.success('Пароль успешно изменен!');
+            localStorage.setItem('token',uid);
             window.location.href = '/';
         } else {
-            message.warning('Что-то пошло не так! Попробуйте ещё раз :)', 2000);
+            message.warning('Что-то пошло не так! Попробуйте ещё раз :)');
         }
     }
     useEffect(() => {
@@ -100,7 +101,7 @@ const Forgot = ()=>{
                                 <input type="password" placeholder="Пароль" className="form-control mt-4" onChange={(e) => setPassword(e.target.value)} />
                                 <input type="password" placeholder="Повторить пароль" className="form-control mt-4" />
                                 <br />
-                                <a href="#" className="btn btn-primary mt-3" onClick={ValidParams}>Зарегистрироваться</a>
+                                <a href="#" className="btn btn-primary mt-3" onClick={ValidParams}>Изменить пароль на новый</a>
                             </div>
                         </div>
                     </div>

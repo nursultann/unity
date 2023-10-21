@@ -51,7 +51,7 @@ const Login = () => {
                             <input type="text" placeholder="996555112233" className="form-control mt-4" onChange={(e) => setPhone(e.target.value)} />
                             <input type="text" placeholder="Пароль" className="form-control mt-4" onChange={(e) => setPassword(e.target.value)} />
                             <a onClick={ValidParams} className="btn btn-primary mt-3">Войти</a><br />
-                            <a className="text-white" href="/forgot">Забыли пароль?</a> <a className="text-white" href="/register">Регистрация</a>
+                            <a className="text-white" href="/forgot-password">Забыли пароль?</a> <a className="text-white" href="/register">Регистрация</a>
                         </div>
                     </div>
                 </div>
