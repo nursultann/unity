@@ -38,7 +38,7 @@ const Header = () => {
                                 <img className="ms-5" src={logo} alt="" width={'100'} />
                             </div>
                             <div className="col-6">
-                            <h1 className="text-center text-white" style={{fontSize : '30pt'}}>Жилищный кооператив</h1>    
+                            <h1 className="text-center text-white" style={{fontSize : '30pt'}}>Турак жай кооперативи</h1>    
                             </div>
                             <div className="col-3 text-end">
                                 <a className="badge border bg-light text-inf px-4" href="/profile">Личный кабинет</a>
@@ -48,10 +48,10 @@ const Header = () => {
                     </div>
                     <div className="col-12 d-flex justify-content-center py-4">
                         <div className="col-8 d-flex justify-content-around">
-                        <a className="badge border-dark bg-light text-inf px-5" href="/chat">Общий чат</a>
-                        <a className="badge border bg-light text-inf px-5" href="/list">Список</a>
-                        <a className="badge border bg-light text-inf px-5" href="/about-us">Информация о компании</a>
-                        <a className="badge border bg-light text-inf px-5" href="/content">Видео и фото</a>
+                        <a className="badge border-dark bg-light text-inf px-5" href="/chat">Башкы чат</a>
+                        <a className="badge border bg-light text-inf px-5" href="/list">Каттоо тизме</a>
+                        <a className="badge border bg-light text-inf px-5" href="/about-us">Компания тууралу маалымат</a>
+                        <a className="badge border bg-light text-inf px-5" href="/content">СҮРӨТ / ВИДЕО</a>
                         </div>
                     </div>
                 </div>

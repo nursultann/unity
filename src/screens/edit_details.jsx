@@ -187,7 +187,7 @@ const Edit = () => {
                                 <label className='mt-2'><span className='text-danger'>*</span>Имя</label>
                                 <input defaultValue={user.name != 'undefined' ? user.name : ''} onChange={(e)=>setName(e.target.value)} type="text" className='form-control' placeholder='Имя' />
                                 <label className='mt-2'><span className='text-danger'>*</span>Фамилия</label>
-                                <input defaultValue={user.lastname != 'undefined' ? user.lastName : ''} onChange={(e)=>setLastName(e.target.value)} type="text" className='form-control' placeholder='Фамилия' />
+                                <input defaultValue={user.lastname != 'undefined' ? user.lastname : ''} onChange={(e)=>setLastName(e.target.value)} type="text" className='form-control' placeholder='Фамилия' />
                                 <label className='mt-2'>Отчество <span className='text-warning'>!</span> Если нет отчества то оставьте поле пустым</label>
                                 <input defaultValue={user.middlename != 'null' ? user.middlename : ""} onChange={(e)=>setMiddleName(e.target.value)} type="text" className='form-control' placeholder='Отчество' />
                                 <label className='mt-2'><span className='text-danger'>*</span>Дата рождения</label>
@@ -215,7 +215,7 @@ const Edit = () => {
                         <label className='mt-2'><span className='text-danger'>*</span>Фото паспорта с передней стороны</label>
                         <input className='form-control' type="file" name="" id="" onChange={(e)=>setPassPhoto(e.target.files[0])} />
                         <label className='mt-2'><span className='text-danger'>*</span>Дата выдачи паспорта</label>
-                        <input type="date" name="" id="" className='form-control' onChange={(e)=>setPassIssue(e.target.value)} />
+                        <input defaultValue={user.pass_date_issue} type="date" name="" id="" className='form-control' onChange={(e)=>setPassIssue(e.target.value)} />
                         </div>
                         <div className="col-6">
                         {/* <Upload
@@ -242,7 +242,7 @@ const Edit = () => {
                         <label className='mt-2'><span className='text-danger'>*</span>Фото паспорта с обратной стороны</label>
                         <input className='form-control' type="file" name="" id="" onChange={(e)=>setPassPhotoBack(e.target.files[0])} />
                         <label className='mt-2'><span className='text-danger'>*</span>Срок действия</label>
-                        <input type="date" name="" id="" className='form-control' onChange={(e)=>setPassExpiry(e.target.value)}/>
+                        <input defaultValue={user.pass_expiry_date} type="date" name="" id="" className='form-control' onChange={(e)=>setPassExpiry(e.target.value)}/>
                         </div>
                         <div className="col-6 py-3">
                             <b>Плата за обслуживание</b> 
