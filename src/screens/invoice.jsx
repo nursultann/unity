@@ -42,42 +42,54 @@ const Invoice = () => {
         <div className='p-3'>
             <Preview id={'jsx-template'} >
                 <div className="col-12 p-5 border border-danger" style={{ backgroundImage: 'url(' + back + ')', backgroundSize: 'cover' }}>
-                    <div className="col-12 text-center mb-4">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore exercitationem cupiditate nostrum obcaecati, eveniet totam autem aperiam modi harum, rerum quod quis aut alias odio optio perferendis voluptates aspernatur blanditiis.
+                    <div className="col-12 text-start mb-4">
+                        Кыргыз Республикасынын жарандарын ыктыярдуу бирикмесинин негизинде турак жайлуу болуусун жеңил жол менен уюштуруучу
+                        коммерциялык эмес системалуу кооперативтик компания <br />
                     </div>
                     <div className="col-12 d-flex justify-content-center">
                         <div className="col-3">
                             <img src={logo} alt="" width={'100%'} />
+                            <h4 className='text-center mt-4'>КҮБӨЛҮК</h4>
                         </div>
                     </div>
-                    <div className="col-12 mt-5 d-flex justify-content-center">
+                    <div className="col-12 mt-2 d-flex justify-content-center">
                         <div className="col-4 text-center">
-                            Код
+                            <h5>Текшерүү номери (бул номер документтин номери болуп эсептелет)</h5>
                             <input type="text" className='form-control' />
                         </div>
                     </div>
-                    <div className="col-12 mt-5">
-                        {userDetails != null ?
-                            <>
-                                <p>Имя: {userDetails.name}</p>
-                                <p>Фамилия: {userDetails.lastname}</p>
-                                <p>ID: {userDetails.id}</p>
-                                <p>Адрес: {userDetails.address}</p>
-                                <p>Дата регистрации {userDetails.date_registr}</p>
-                            </>
-                            :
-                            <>
-
-
-                            </>
-                        }
+                    <div className="row">
+                        <div className="col-6 mt-5">
+                            {userDetails != null ?
+                                <>
+                                    <p>Аты: {userDetails.name}</p>
+                                    <p>Фамилиясы: {userDetails.lastname}</p>
+                                    <p>Колдонуучунун ID : {userDetails.id}</p>
+                                    <p>Жашаган дареги: {userDetails.address}</p>
+                                    <p>Каттоо болгон куну {userDetails.date_registr}</p>
+                                </>
+                                :
+                                <>
+                                </>
+                            }
+                        </div>
+                        <div className="col-6 mt-5">
+                            <p>Эки тараптуу данный
+                                (биринчи тарапка клиенттердин данныйы экинчи тарапка ЮНИТИ компаниясынын башкы президенти И. Танаев)
+                            </p>
+                            <br />
+                            <br />
+                            <br />
+                            _________________________ <br />
+                            печать кол
+                        </div>
                     </div>
                 </div>
             </Preview>
             <div className="col-12">
                 <p><b>Сохраняем файл договора, прежде чем перейти на главную страницу</b></p>
                 Скачать договор<br />
-                <a href="#" onClick={()=>print('a', 'jsx-template')} className='btn btn-outline-warning'>Скачать договор</a>
+                <a href="#" onClick={() => print('a', 'jsx-template')} className='btn btn-outline-warning'>Скачать договор</a>
                 <a href="/list" className='btn btn-outline-secondary ms-2'>Перейти на главную</a>
             </div>
         </div>

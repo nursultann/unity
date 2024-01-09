@@ -8,7 +8,7 @@ import Main from './screens/main';
 import Forgot from './screens/forgot_password';
 import Profile from './screens/profile';
 import Chat from './screens/chat';
-import 'moment/locale/ru';
+import 'moment/locale/ky';
 import Admin from './screens/admin';
 import AdminConsole from './screens/admin_console';
 import Info from './screens/content';
@@ -36,5 +36,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

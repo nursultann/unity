@@ -43,20 +43,20 @@ const Register = () => {
             return;
         final.confirm(code).then((result) => {
             console.log("OTP", result);
-            message.success('Код потверждения подтвержден', 10);
+            message.success('Текшерүү код туура!', 10);
             setUid(result.user.uid);
             setState(true);
             // result.user.uuid;
             console.log('success ', result);
         }).catch((err) => {
-            message.error('Код потверждения введен неверно!', 10);
+            message.error('Текшерүү код туура эмес!', 10);
         })
     }
     const ValidParams = () => {
         if (phone != null && password != null) {
             RegisterUser(phone, password, name, lastName, passport, email);
         } else {
-            message.warning('Заполните все поля!', 2000);
+            message.warning('Баардык тааларды толтуруңуз!', 2000);
         }
     }
     const RegisterUser = async (phone, password, name, lastName, passport, email) => {
@@ -82,7 +82,7 @@ const Register = () => {
         if (data.data.status == 200) {
             window.location.href = '/';
         } else {
-            message.warning('Что-то пошло не так! Попробуйте ещё раз :)', 2000);
+            message.warning('Бирдеке туура эмес кетти, кайталап көрүңүз! :)', 2000);
         }
     }
     useEffect(() => {
@@ -138,15 +138,15 @@ const Register = () => {
                     <div className="row">
                         <div className="col-12 d-flex justify-content-center" style={{ marginTop: "100px" }}>
                             <div className="col-6 text-center bg-inf text-white p-3 px-5">
-                                <h1 className="text-center">Регистрация</h1>
-                                <input type="text" placeholder="Имя" className="form-control mt-4" onChange={(e) => setName(e.target.value)} />
-                                <input type="text" placeholder="Фамилия" className="form-control mt-4" onChange={(e) => setLastName(e.target.value)} />
-                                <input type="text" placeholder="Номер паспорта КР" className="form-control mt-4" onChange={(e) => setPassport(e.target.value)} />
+                                <h1 className="text-center">КАТТОО</h1>
+                                <input type="text" placeholder="Аты" className="form-control mt-4" onChange={(e) => setName(e.target.value)} />
+                                <input type="text" placeholder="Фамилиясы" className="form-control mt-4" onChange={(e) => setLastName(e.target.value)} />
+                                <input type="text" placeholder="КР паспорт номериңиз" className="form-control mt-4" onChange={(e) => setPassport(e.target.value)} />
                                 <input type="email" placeholder="E-mail" className="form-control mt-4" onChange={(e) => setEmail(e.target.value)} />
-                                <input type="password" placeholder="Пароль" className="form-control mt-4" onChange={(e) => setPassword(e.target.value)} />
-                                <input type="password" placeholder="Повторить пароль" className="form-control mt-4" />
+                                <input type="password" placeholder="Сыр сөз" className="form-control mt-4" onChange={(e) => setPassword(e.target.value)} />
+                                <input type="password" placeholder="Сыр сөздү кайталаңыз" className="form-control mt-4" />
                                 <br />
-                                <a href="#" className="btn btn-primary mt-3" onClick={ValidParams}>Зарегистрироваться</a>
+                                <a href="#" className="btn btn-primary mt-3" onClick={ValidParams}>каттоо</a>
                             </div>
                         </div>
                     </div>
@@ -161,18 +161,18 @@ const Register = () => {
                                         <h1 className="text-center">Телефон номериниз</h1>
                                         <input type="number" placeholder="Номер телефона без +" className="form-control mt-4" onChange={(e) => setPhone(e.target.value)} />
                                         <br />
-                                        <input type="checkbox" name="" id="" /> Принять условия соглашения <br />
+                                        <input type="checkbox" name="" id="" /> Макулдашылган шарттарды кабыл алам <br />
                                         <div className="my-3 ml-xl-5" id="recaptcha-container"></div><br />
-                                        <a href="#" className="btn btn-primary mt-3" onClick={checkPhone}>Получить код подтверждения</a>
+                                        <a href="#" className="btn btn-primary mt-3" onClick={checkPhone}>Текшерүү кодун алуу</a>
                                     </div>
                                 </>
                                 :
                                 <>
                                     <div className="col-5 text-center bg-inf text-white p-3 px-5">
-                                        <h1 className="text-center">Подтвердить код подтверждения</h1>
+                                        <h1 className="text-center">Текшерүү кодун ырастоо</h1>
                                         <input type="number" placeholder="Код подтверждения" defaultValue='' className="form-control mt-4" onChange={(e) => setCode(e.target.value)} />
                                         <br />
-                                        <a href="#" className="btn btn-primary mt-3" onClick={ValidOtp}>Подтвердить код</a>
+                                        <a href="#" className="btn btn-primary mt-3" onClick={ValidOtp}>Текшерүү кодун ырастоо</a>
                                     </div>
                                 </>
                             }

@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 *{
   box-sizing: border-box;
-  font-size: 13px;
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
 }
 .list{
   border: 1px solid #ccc;
@@ -25,11 +27,23 @@
   background-color: white;
 }
 .bg-inf{
-  background-color:#067A7A  !important;
+  background-color:#035959 !important;
 }
 .text-inf{
-  color: #067A7A  !important;
+  color: #035959 !important;
+  font-size: 12px !important;
+  text-decoration: none;
 }
 /* .date{
   width: 20%;
+} */
+.table-name{
+  width: 50%;
+}
+.text-inf:hover{
+  background-color: #035959 !important;
+  color: white !important;
+}
+/* .margin{
+  margin-top: 200px !important;
 } */

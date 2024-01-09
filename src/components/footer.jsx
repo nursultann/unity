@@ -64,107 +64,101 @@ const Footer = () => {
         getReports();
     }, [])
     return (
-        <div className="row">
-            <div className="col-12 mt-5 p-4 bg-inf">
+        <div className="row mt-2">
+            <div className="col-12 p-4 bg-inf">
                 {tableData != null ?
                     <div className="row">
-                        <div className="col-3 text-white">
+                        <div className="col-lg-3 text-white d-flex align-items-end">
                             <p>
-                                Кыргызстан, Ош <br />
-                                Кыргызстан, Ош <br />
-                                Кыргызстан, Ош <br />
-                                Кыргызстан, Ош <br />
-                                Кыргызстан, Ош Кыргызстан, Ош <br />
-                                Кыргызстан, Ош Кыргызстан, Ош <br />
-                                Кыргызстан, Ош Кыргызстан, Ош<br />
-                                Кыргызстан, Ош Кыргызстан, Ош<br />
+                                “Негизги эсеп” көрсөтүлгөн сумма биринчи кезекте турган адамга, талаптардын жана чектөөлөрдүн негизинде өзү тандаган турак жай менен камсыз кылуу үчүн жумшалат.
+                                Топтолгон сумманын чеги Кыргыз Республикасынын аймагындагы жашоого баардык шарты бар эки бөлмөлүү батирлердин орточо баасына каралган.Жана бул баа ар жылда ар кандай көрсөткүчүнө карап өсө берет.
+                                Басса белгилөөчү нерсе Кыргыз Республикасынын эч кандай турак жайга ээлик кылбаган жарандары гана катоого туруусу шарт.
                             </p>
                         </div>
-                        <div className="col-6">
+                        <div className="col-lg-6">
                             <div className="row">
                                 <div className="col-12">
                                     <div className="row">
-                                        <div className="col-6">
+                                        <div className="col-lg-6">
                                             <div className="bg-white rounded">
                                                 <h5 className="col-12 text-center">
                                                     {(tableData.service_painment) - (((tableData.service_painment) * 16) / 100)}
                                                 </h5>
-                                                <h6 className="col-12 text-center bg-secondary-subtle rounded">Плата за обслуживание</h6>
+                                                <h6 className="col-12 text-center bg-secondary-subtle rounded">Кызмат көрсөтүүгө болгон төлөм</h6>
                                             </div>
                                         </div>
-                                        <div className="col-2">
+                                        <div className="col-lg-2">
                                             <div className="bg-white rounded">
                                                 <h5 className="col-12 text-center">
                                                     {((tableData.service_painment) * 3) / 100}
                                                 </h5>
-                                                <h6 className="col-12 text-center bg-secondary-subtle rounded">Налог 3%</h6>
+                                                <h6 className="col-12 text-center bg-secondary-subtle rounded">Салык 3%</h6>
                                             </div>
                                         </div>
-                                        <div className="col-2">
+                                        <div className="col-lg-2">
                                             <div className="bg-white rounded">
                                                 <h5 className="col-12 text-center">
                                                     {((tableData.service_painment) * 3) / 100}
                                                 </h5>
-                                                <h6 className="col-12 text-center bg-secondary-subtle rounded">Налог 3%</h6>
+                                                <h6 className="col-12 text-center bg-secondary-subtle rounded">Салык 3%</h6>
                                             </div>
                                         </div>
-                                        <div className="col-2">
+                                        <div className="col-lg-2">
                                             <div className="bg-white rounded">
                                                 <h5 className="col-12 text-center">
                                                     {((tableData.service_painment) * 10) / 100}
                                                 </h5>
-                                                <h6 className="col-12 text-center bg-secondary-subtle rounded">Доброта 10%</h6>
+                                                <h6 className="col-12 text-center bg-secondary-subtle rounded">Кайрымдуулук 10%</h6>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="col-12">
                                     <div className="row">
-                                        <div className="col-6">
+                                        <div className="col-lg-6">
                                             <div className="bg-white rounded">
                                                 <h5 className="col-12 text-center text-danger">
                                                     {tableData.main_sum}
                                                 </h5>
-                                                <h6 className="col-12 text-center bg-secondary-subtle rounded">Основные суммы</h6>
+                                                <h6 className="col-12 text-center bg-secondary-subtle rounded">Негизги эсеп</h6>
                                             </div>
                                         </div>
-                                        <div className="col-6 text-center p-3">
+                                        <div className="col-lg-6 text-center p-3">
                                             <a className="btn btn-warning text-white px-1 p-0" onClick={showModal}>
-                                                Контроль
+                                                Көзөмөл
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-6 text-white">
-                                    Кыргызстан, Ош <br />
-                                    Кыргызстан, Ош <br />
-                                    Кыргызстан, Ош <br />
+                                <div className="col-lg-6 text-white">
+                                    “Көзөмөл” баскычы аркылуу кызмат көрсөтүүгө болгон чыгымдар жана төлөмдөрдүн бөлүштүрүү кыймылы сакталып көрсөтүлөт.
+                                    Бул нерсени веб сайтка кирген учурдан тартып көрө аласыз
                                 </div>
-                                <div className="col-6 text-white">
-                                    <h3>Адрес:</h3>
-                                    Кыргызстан, Ош <br />
+                                <div className="col-lg-6 text-white">
+                                    <h3>Дарегибиз:</h3>
+                                    Ош шаары Масалиева көчөсү <br />
                                 </div>
                             </div>
                         </div>
-                        <div className="col-3 text-white">
-                            <p><b>Связаться с нами:</b></p>
-                            <img src={whatsapp} alt="" width={20} height={20} /> +996 998 166 696 <br />
-                            <img src={gmail} alt="" width={20} height={20} /> unity.2023kg@gmail.com <br />
-                            <img src={mail} alt="" width={20} height={20} /> unity_unity@internet.ru <br />
-                            <img src={youtube} alt="" width={20} height={20} /> UNITY KG
+                        <div className="col-lg-3 text-white">
+                            <p><b>Биз менен байланышыныз:</b></p>
+                            <img className="mb-2" src={whatsapp} alt="" width={20} height={20} /> &nbsp;&nbsp;+996 998 166 696 <br />
+                            <img className="mb-2" src={gmail} alt="" width={20} height={20} />  &nbsp;&nbsp;unity.2023kg@gmail.com <br />
+                            <img className="mb-2" src={mail} alt="" width={20} height={20} />  &nbsp;&nbsp;unity_unity@internet.ru <br />
+                            <img src={youtube} alt="" width={20} height={20} /> &nbsp;&nbsp;UNITY KG
                         </div>
                     </div>
                     : <></>
                 }
-                <Modal title="Отчет по обслуживанию" open={isModalOpen} footer={null} onOk={handleOk} onCancel={handleCancel}>
+                <Modal title="" open={isModalOpen} footer={null} onOk={handleOk} onCancel={handleCancel}>
                     <div className="row">
                         <div className="col-12 px-0">
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Отчет по обслуживанию</button>
-                                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Отчет по ежемесячным выплатам</button>
+                                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Компаниянын жалпы чыгымы</button>
+                                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Турак жай үчүн төлөнгөн төлөмдөрдүн көрсөткүчү</button>
                                 </div>
                             </nav>
                         </div>
@@ -177,10 +171,10 @@ const Footer = () => {
                                         <tr>
                                             <td>№</td>
                                             <td>Дата</td>
-                                            <td>Плата за обслуживание</td>
-                                            <td>Налог 3%</td>
-                                            <td>Налог 3%</td>
-                                            <td>Доброта 10%</td>
+                                            <td>Кызмат көрсөтүүгө болгон төлөм</td>
+                                            <td>Салык 3%</td>
+                                            <td>Салык 3%</td>
+                                            <td>Кайрымдуулук 10%</td>
                                         </tr>
                                         {reports.map((item) =>
                                             <tr>
@@ -224,7 +218,6 @@ const Footer = () => {
                             </table>
                         </div>
                     </div>
-
                 </Modal>
             </div>
         </div>

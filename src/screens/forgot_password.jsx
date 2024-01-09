@@ -97,11 +97,11 @@ const Forgot = ()=>{
                     <div className="row">
                         <div className="col-12 d-flex justify-content-center" style={{ marginTop: "100px" }}>
                             <div className="col-5 text-center bg-inf text-white p-3 px-5">
-                                <h1 className="text-center">Новый пароль</h1>
-                                <input type="password" placeholder="Пароль" className="form-control mt-4" onChange={(e) => setPassword(e.target.value)} />
-                                <input type="password" placeholder="Повторить пароль" className="form-control mt-4" />
+                                <h1 className="text-center">Жаны сыр сөз</h1>
+                                <input type="password" placeholder="жаны сыр сөз" className="form-control mt-4" onChange={(e) => setPassword(e.target.value)} />
+                                <input type="password" placeholder="сыр сөздү кайталоо" className="form-control mt-4" />
                                 <br />
-                                <a href="#" className="btn btn-primary mt-3" onClick={ValidParams}>Изменить пароль на новый</a>
+                                <a href="#" className="btn btn-primary mt-3" onClick={ValidParams}>Сыр сөздү өзгөртүү</a>
                             </div>
                         </div>
                     </div>
@@ -113,20 +113,20 @@ const Forgot = ()=>{
                             {final == false ?
                                 <>
                                     <div className="col-6 text-center bg-inf text-white p-3 px-5">
-                                        <h1 className="text-center">Номер телефона</h1>
-                                        <input type="number" placeholder="Номер телефона" className="form-control mt-4" onChange={(e) => setPhone(e.target.value)} />
+                                        <h1 className="text-center">Телефон номериңиз</h1>
+                                        <input type="number" placeholder="996550500000" className="form-control mt-4" onChange={(e) => setPhone(e.target.value)} />
                                         <br />
                                         <div className="my-3 ml-xl-5" id="recaptcha-container"></div><br />
-                                        <a href="#" className="btn btn-primary mt-3" onClick={checkPhone}>Получить код подтверждения</a>
+                                        <a href="#" className="btn btn-primary mt-3" onClick={checkPhone}>Текшерүү кодун алуу</a>
                                     </div>
                                 </>
                                 :
                                 <>
                                     <div className="col-5 text-center bg-info text-white p-3 px-5">
-                                        <h1 className="text-center">Подтвердить код подтверждения</h1>
+                                        <h1 className="text-center">Текшерүү кодун текшерүү</h1>
                                         <input type="number" placeholder="Код подтверждения" defaultValue='' className="form-control mt-4" onChange={(e) => setCode(e.target.value)} />
                                         <br />
-                                        <a href="#" className="btn btn-primary mt-3" onClick={ValidOtp}>Подтвердить код</a>
+                                        <a href="#" className="btn btn-primary mt-3" onClick={ValidOtp}>Алдыга</a>
                                     </div>
                                 </>
                             }

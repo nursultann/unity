@@ -261,7 +261,8 @@ const AdminConsole = () => {
             'region': region,
             'street': street,
             'passport_teh': passportTeh,
-            'code': code
+            'code': code,
+            'id':id
         }
         const data = await axios({
             method: 'post',

@@ -72,10 +72,10 @@ const Chat = () => {
         <>
             <Header />
             <div className="container px-4">
-                <div className="col-12">
+                <div className="col-12 mt-3 mt-lg-0">
                     <div className="row">
                         <div className="col-12">
-                            <h4>Общий чат</h4>
+                            <h4>Баарлашуу</h4>
                         </div>
                         <div
                             className="col-12 bg-secondary-subtle p-5"
@@ -125,7 +125,7 @@ const Chat = () => {
                             <textarea
                                 onChange={(e) => setValue(e.target.value)}
                                 value={value}
-                                placeholder="Введите свое сообщение..."
+                                placeholder="Билдирүү калтырыңыз..."
                                 name=""
                                 id=""
                                 className="form-control"
@@ -133,8 +133,8 @@ const Chat = () => {
 
                             </textarea>
                             <div className="col-12 d-flex justify-content-end">
-                                <button className="btn btn-primary mt-2" onClick={postMessage}>
-                                    Отправить сообщение
+                                <button className="btn btn-primary mt-2 col-12" onClick={postMessage}>
+                                    Билдирүү жөнөтүңүз
                                 </button>
                             </div>
                         </div>

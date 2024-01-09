@@ -3,7 +3,6 @@ import Footer from "../components/footer";
 import Header from "../components/header";
 import axios from "axios";
 import { url } from "../global_variables/variables";
-
 const Main = () => {
     const local = localStorage.getItem('token');
     const [userDetails, setUserDetails] = useState(null);
@@ -40,6 +39,10 @@ const Main = () => {
         console.log('table data', data);
         if (data.data.status === 200) {
             setTableData(data.data.users);
+            let arr = [];
+            for(let i=0; i < data.data.users.length; i++){
+                arr = [];
+            }
         }
     }
     useEffect(() => {
@@ -70,17 +73,17 @@ const Main = () => {
     return (
         <>
             <Header />
-            <div className="col-12 bg-secondary-subtle p-4">
+            <div className="col-12 bg-secondary-subtle p-lg-4">
                 <div className="row">
-                    <div className="col-8">
+                    <div className="col-lg-8 p-3">
                         <div className="row">
                             <div className="col-12">
-                                В этот список вошли граждане, стоящие в очереди на получение жилой недвижимости.
-                                Для того, чтобы встать в очередь, необходима справка об отсутствии недвижимости на Ваше имя.
-                                Если вы состоите в браке, необходимо свидетельство о браке.
+                                Бул тизмеге турак-жай кыймылсыз мүлк алуу үчүн кезекте турган жарандар кирет.
+                                Кезекке туруу үчүн сиздин атыңызда кыймылсыз мүлктүн жоктугун тастыктаган маалымкат керек.
+                                Үй-бүлөлүү болсоңуз, нике күбөлүгү талап кылынат.
                             </div>
                             <div className="col-12 py-4">
-                                <input type="search" placeholder="Поиск" className="form-control" onChange={(e) => { Search(e.target.value) }} name="" id="" />
+                                <input type="search" placeholder="Издөө" className="form-control" onChange={(e) => { Search(e.target.value) }} name="" id="" />
                             </div>
                             {searchResult != null ?
                                 <>
@@ -91,16 +94,16 @@ const Main = () => {
                                                     №
                                                 </th>
                                                 <th>
-                                                    ФИО
+                                                    Аты жөнү
                                                 </th>
                                                 <th>
-                                                    Плата за обслуживание
+                                                    Кызмат көрсөтүүгө болгон төлөм
                                                 </th>
                                                 <th>
-                                                    Основные суммы
+                                                    Негизги эсеп
                                                 </th>
                                                 <th>
-                                                    Вперед
+                                                    Кезегиңизди аныктоочу эсебиңиз
                                                 </th>
                                             </tr>
                                             {searchResult.map((item) =>
@@ -126,17 +129,17 @@ const Main = () => {
                                         <th>
                                             №
                                         </th>
-                                        <th>
-                                            ФИО
+                                        <th className="table-name">
+                                            Аты жөнү
+                                        </th>
+                                        <th className="bg-secondary-subtle">
+                                            Кызмат көрсөтүүгө <br /> болгон төлөм
                                         </th>
                                         <th>
-                                            Плата за обслуживание
+                                            Негизги эсеп
                                         </th>
-                                        <th>
-                                            Основные суммы
-                                        </th>
-                                        <th>
-                                            Вперед
+                                        <th className="bg-secondary-subtle">
+                                            Кезегиңизди аныктоочу <br /> эсебиңиз
                                         </th>
                                     </tr>
                                     {tableData != null ?
@@ -144,19 +147,17 @@ const Main = () => {
                                             {tableData.map((item) =>
                                                 <tr>
                                                     <td>{item.id}</td>
-                                                    <td>{item.lastname + ' ' + item.name + ' ' + (item.middname !== undefined ? item.middname : '')}</td>
-                                                    <td>2000</td>
+                                                    <td>{item.lastname + ' ' + item.name + ' ' + (item.middname !== undefined ? item.middname : '')} 
+                                                    <span style={{fontSize : '6pt', float : 'inline-end'}} className="text-muted">{item.date_registr}</span></td>
+                                                    <td className="bg-secondary-subtle">2000</td>
                                                     <td>20000</td>
-                                                    <td>{item.balance}</td>
+                                                    <td className="bg-secondary-subtle">{item.balance}</td>
                                                 </tr>
                                             )
                                             }
-
                                         </>
                                         :
                                         <>
-
-
                                         </>
                                     }
                                 </table>
@@ -164,7 +165,7 @@ const Main = () => {
                                     <>
                                         {userDetails.status == 0 ?
                                             <button onClick={() => pageTo('/edit')} className="col-12 mt-3 btn btn-light rounded-pill">
-                                                Добавить в список
+                                                Тизмеге кошулуу
                                             </button>
                                             : <></>
                                         }
@@ -175,13 +176,15 @@ const Main = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-4 ps-5">
-                        <div className="row">
+                    <div className="col-lg-4 ps-0 ps-lg-5">
+                        <div className="row mt-3">
                             <div className="col-12">
-                            <p>Список граждан, владеющих недвижимостью через платформу</p>
+                                <p>Платформа аркылуу кыймылсыз мүлккө ээ болгон
+                                    жарандардын тизмеси
+                                </p>
                             </div>
                             <div className="col-12">
-                                <input type="search" placeholder="Поиск" className="form-control" src="" alt="" />
+                                <input type="search" placeholder="Издөө" className="form-control" src="" alt="" />
                             </div>
                             <div className="col-12 py-4">
                                 <table className="list">
@@ -206,8 +209,6 @@ const Main = () => {
                                         </>
                                         :
                                         <>
-
-
                                         </>
                                     }
                                 </table>
