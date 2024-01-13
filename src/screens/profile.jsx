@@ -184,7 +184,7 @@ const Profile = () => {
                     <a className='btn btn-info' href="/edit">Добавить данные в список</a>
                 </div>
             }
-            {userDetails != null ?
+            {/* {userDetails != null ?
                 <div className='col-12 mt-2'>
                     <h2 className='text-danger text-center'>{userDetails.credit_balance}</h2>
                     {userDetails.credit_balance != 0 ?
@@ -202,7 +202,7 @@ const Profile = () => {
 
                 </>
 
-            }
+            } */}
         </>
     )
 }

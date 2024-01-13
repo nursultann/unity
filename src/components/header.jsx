@@ -38,7 +38,7 @@ const Header = () => {
                                 <img className="ms-5" src={logo} alt="" width={'100'} />
                             </div>
                             <div className="col-6">
-                            <h1 className="text-center text-white title" style={{fontSize : '30pt'}}>ТУРАК ЖАЙ КООПЕРАТИВИ</h1>    
+                            <h1 className="text-center text-white title" style={{fontSize : '30pt', fontWeight : 'bolder'}}>ТУРАК ЖАЙ КООПЕРАТИВИ</h1>    
                             </div>
                             <div className="col-3 text-end">
                                 <a className="badge border bg-light text-inf px-4" href="/profile">Жеке кабинет</a>

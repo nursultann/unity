@@ -132,11 +132,11 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-lg-6 text-white">
+                                <div className="col-lg-6 text-white d-flex align-items-end">
                                     “Көзөмөл” баскычы аркылуу кызмат көрсөтүүгө болгон чыгымдар жана төлөмдөрдүн бөлүштүрүү кыймылы сакталып көрсөтүлөт.
                                     Бул нерсени веб сайтка кирген учурдан тартып көрө аласыз
                                 </div>
-                                <div className="col-lg-6 text-white">
+                                <div className="col-lg-6 text-white pt-lg-5">
                                     <h3>Дарегибиз:</h3>
                                     Ош шаары Масалиева көчөсү <br />
                                 </div>
@@ -190,7 +190,7 @@ const Footer = () => {
                                     </>
                                     :
                                     <>
-                                        <p className="text-center text-secondary p-3"> Нет отчетов по обслуживанию</p>
+                                        <p className="text-center text-secondary p-3"> </p>
                                     </>
                                 }
                             </table>
@@ -199,11 +199,19 @@ const Footer = () => {
                             <table className="list">
                                 {painment1 != null ?
                                     <>
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>Дата</td>
+                                            <td>ФИО</td>
+                                            <td>Кызмат көрсөтүүгө болгон төлөм</td>
+                                            <td>Төлөм</td>
+                                        </tr>
                                         {painment1.map((item) =>
                                             <tr>
                                                 <td>{item.id}</td>
                                                 <td className="date">{item.date_of_amount}</td>
                                                 <td>{item.lastname + ' ' + item.name + ' ' + (item.middname != undefined ? item.middname : '')}</td>
+                                                <td>2000</td>
                                                 <td>{item.sum}</td>
                                             </tr>
                                         )
@@ -212,7 +220,6 @@ const Footer = () => {
                                     </>
                                     :
                                     <>
-
                                     </>
                                 }
                             </table>

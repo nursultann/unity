@@ -40,7 +40,7 @@ const Login = () => {
     }
     useEffect(() => {
         checkLogged();
-    }, [])
+    }, []);
     return (
         <>
             <div className="container-fluid">
