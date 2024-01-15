@@ -68,14 +68,14 @@ const Footer = () => {
             <div className="col-12 p-4 bg-inf">
                 {tableData != null ?
                     <div className="row">
-                        <div className="col-lg-3 text-white d-flex align-items-end">
+                        <div className="col-lg-3 text-white d-flex align-items-end d-none d-lg-block">
                             <p>
                                 “Негизги эсеп” көрсөтүлгөн сумма биринчи кезекте турган адамга, талаптардын жана чектөөлөрдүн негизинде өзү тандаган турак жай менен камсыз кылуу үчүн жумшалат.
                                 Топтолгон сумманын чеги Кыргыз Республикасынын аймагындагы жашоого баардык шарты бар эки бөлмөлүү батирлердин орточо баасына каралган.Жана бул баа ар жылда ар кандай көрсөткүчүнө карап өсө берет.
                                 Басса белгилөөчү нерсе Кыргыз Республикасынын эч кандай турак жайга ээлик кылбаган жарандары гана катоого туруусу шарт.
                             </p>
                         </div>
-                        <div className="col-lg-6">
+                        <div className="col-lg-7">
                             <div className="row">
                                 <div className="col-12">
                                     <div className="row">
@@ -124,7 +124,7 @@ const Footer = () => {
                                             </div>
                                         </div>
                                         <div className="col-lg-6 text-center p-3">
-                                            <a className="btn btn-warning text-white px-1 p-0" onClick={showModal}>
+                                            <a className="btn btn-warning text-white px-4 p-0" onClick={showModal}>
                                                 Көзөмөл
                                             </a>
                                         </div>
@@ -132,17 +132,17 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div className="row">
-                                <div className="col-lg-6 text-white d-flex align-items-end">
+                                <div className="col-lg-6 text-white pt-lg-4 d-none d-lg-block">
                                     “Көзөмөл” баскычы аркылуу кызмат көрсөтүүгө болгон чыгымдар жана төлөмдөрдүн бөлүштүрүү кыймылы сакталып көрсөтүлөт.
                                     Бул нерсени веб сайтка кирген учурдан тартып көрө аласыз
                                 </div>
-                                <div className="col-lg-6 text-white pt-lg-5">
+                                <div className="col-lg-6 text-white pt-lg-4 d-none d-lg-block">
                                     <h3>Дарегибиз:</h3>
                                     Ош шаары Масалиева көчөсү <br />
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-3 text-white">
+                        <div className="col-lg-2 text-white d-none d-lg-block">
                             <p><b>Биз менен байланышыныз:</b></p>
                             <img className="mb-2" src={whatsapp} alt="" width={20} height={20} /> &nbsp;&nbsp;+996 998 166 696 <br />
                             <img className="mb-2" src={gmail} alt="" width={20} height={20} />  &nbsp;&nbsp;unity.2023kg@gmail.com <br />
@@ -152,7 +152,7 @@ const Footer = () => {
                     </div>
                     : <></>
                 }
-                <Modal title="" open={isModalOpen} footer={null} onOk={handleOk} onCancel={handleCancel}>
+                <Modal title="" width={'80%'} open={isModalOpen} footer={null} onOk={handleOk} onCancel={handleCancel}>
                     <div className="row">
                         <div className="col-12 px-0">
                             <nav>
@@ -226,6 +226,56 @@ const Footer = () => {
                         </div>
                     </div>
                 </Modal>
+                <div class="accordion accordion-flush d-block d-lg-none" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                Негизги эсеп
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">“Негизги эсеп” көрсөтүлгөн сумма биринчи кезекте турган адамга, талаптардын жана чектөөлөрдүн негизинде өзү тандаган турак жай менен камсыз кылуу үчүн жумшалат.
+                                Топтолгон сумманын чеги Кыргыз Республикасынын аймагындагы жашоого баардык шарты бар эки бөлмөлүү батирлердин орточо баасына каралган.Жана бул баа ар жылда ар кандай көрсөткүчүнө карап өсө берет.
+                                Басса белгилөөчү нерсе Кыргыз Республикасынын эч кандай турак жайга ээлик кылбаган жарандары гана катоого туруусу шарт.</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                Көзөмөл баскычы
+                            </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">“Көзөмөл” баскычы аркылуу кызмат көрсөтүүгө болгон чыгымдар жана төлөмдөрдүн бөлүштүрүү кыймылы сакталып көрсөтүлөт.
+                                Бул нерсени веб сайтка кирген учурдан тартып көрө аласыз</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                Дарегибиз
+                            </button>
+                        </h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">Ош шаары Масалиева көчөсү</div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseThree">
+                                Биз менен байланышыныз:
+                            </button>
+                        </h2>
+                        <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body bg-inf text-white">
+                                <img className="mb-2" src={whatsapp} alt="" width={20} height={20} /> &nbsp;&nbsp;+996 998 166 696 <br />
+                                <img className="mb-2" src={gmail} alt="" width={20} height={20} />  &nbsp;&nbsp;unity.2023kg@gmail.com <br />
+                                <img className="mb-2" src={mail} alt="" width={20} height={20} />  &nbsp;&nbsp;unity_unity@internet.ru <br />
+                                <img src={youtube} alt="" width={20} height={20} /> &nbsp;&nbsp;UNITY KG
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

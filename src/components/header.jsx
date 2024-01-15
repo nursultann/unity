@@ -59,6 +59,7 @@ const Header = () => {
                     <nav class="navbar navbar-expand-lg bg-inf navbar-dark">
                         <div class="container-fluid">
                             <a class="navbar-brand" href="/"><img className="ms-1" src={logo} alt="" width={'50'} /></a>
+                            <span className="fs-3 text-white fw-bold">ТУРАК ЖАЙ КООПЕРАТИВИ</span>
                             <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
