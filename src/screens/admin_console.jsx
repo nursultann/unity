@@ -340,11 +340,28 @@ const AdminConsole = () => {
             message.error('Не удалось сделать отчет!');
         }
     }
+    const changeUserStatus = async (id,type) => {
+        const data = await axios({
+            method: 'update',
+            url: url + 'user-status',
+            params:{
+                'id': id,
+                'type': type
+            }
+        });
+        console.log('data user status ', data);
+        if (data.data.status == 200) {
+            message.success('Успешно!');
+            fetchUsers();
+        } else {
+            message.error('Что-то пошло не так!');
+        }
+    }
     return (
         <div className="container-fluid">
             <div className="row">
                 <div className="col-12 bg-inf text-white">
-                    <h3>Admin Panel</h3>
+                    <h3>Admin Panel Unity</h3>
                     <a className="text-white" href="/list">На сайт</a>
                 </div>
             </div>
@@ -372,10 +389,10 @@ const AdminConsole = () => {
                                                 <td>20000</td>
                                                 <td>{item.balance}</td>
                                                 <td>
-                                                    {item.status == 1 ?
-                                                        <i class="fa-solid fa-check text-success" ></i>
+                                                    {item.status == 2 ?
+                                                        <i class="fa-solid fa-check text-success" style={{cursor : 'pointer'}} onClick={()=>changeUserStatus(item.id,'1')}></i>
                                                         :
-                                                        <i class="fa-solid fa-xmark text-danger"></i>
+                                                        <i class="fa-solid fa-xmark text-danger" style={{cursor : 'pointer'}} onClick={()=>changeUserStatus(item.id,'2')}></i>
                                                     }
                                                 </td>
                                                 <td>
@@ -436,7 +453,6 @@ const AdminConsole = () => {
                                                 </div>
                                             )
                                             }
-
                                         </>
                                         :
                                         <>

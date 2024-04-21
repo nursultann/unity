@@ -16,7 +16,7 @@ import About from './screens/about';
 import Invoice from './screens/invoice';
 function App() {
   return (
-    <div className='container-fluid'>
+    <div className='container-fluid p-0'>
         <BrowserRouter>
               <Routes>
                   <Route path='/list' element={<Main/>}/>

@@ -31,14 +31,14 @@ const Header = () => {
     return (
         <>
             <div className="row">
-                <div className="col-12 bg-inf px-0 mb-2 d-none d-lg-block">
+                <div className="col-12 bg-inf px-0 mb-2 d-none d-lg-block px-0">
                     <div className="col-12">
                         <div className="row py-3">
                             <div className="col-3">
                                 <img className="ms-5" src={logo} alt="" width={'100'} />
                             </div>
                             <div className="col-6">
-                            <h1 className="text-center text-white title" style={{fontSize : '30pt', fontWeight : 'bolder'}}>ТУРАК ЖАЙ КООПЕРАТИВИ</h1>    
+                            <h1 className="text-center text-white title" style={{fontSize : '30pt', fontWeight : 'bolder'}}>ТУРАК ЖАЙ КООПЕРАТИВИ</h1>
                             </div>
                             <div className="col-3 text-end">
                                 <a className="badge border bg-light text-inf px-4" href="/profile">Жеке кабинет</a>
@@ -55,11 +55,11 @@ const Header = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-12 d-block d-lg-none">
+                <div className="col-12 d-block d-lg-none px-0">
                     <nav class="navbar navbar-expand-lg bg-inf navbar-dark">
                         <div class="container-fluid">
                             <a class="navbar-brand" href="/"><img className="ms-1" src={logo} alt="" width={'50'} /></a>
-                            <span className="fs-3 text-white fw-bold">ТУРАК ЖАЙ КООПЕРАТИВИ</span>
+                            <span className="fs-3 text-white fw-bold">UNITY.KG</span>
                             <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
