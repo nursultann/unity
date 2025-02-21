@@ -1,48 +1,77 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { url } from "../global_variables/variables";
-import { message } from "antd";
+import { Snackbar, Alert, TextField, Button, Container, Typography, Box } from "@mui/material";
 
 const Admin = () => {
     const [user, setUser] = useState();
-    const [login,setLogin] = useState();
-    const [password,setPassword]= useState();
-    const local = localStorage.getItem('adminToken');
-    if(local != null){
-        window.location.href = '/admin-console';
+    const [login, setLogin] = useState();
+    const [password, setPassword] = useState();
+    const [openSnackbar, setOpenSnackbar] = useState(false);  // To control Snackbar visibility
+    const [snackbarMessage, setSnackbarMessage] = useState(""); // Message for Snackbar
+
+    const local = localStorage.getItem("adminToken");
+    if (local != null) {
+        window.location.href = "/admin-console";
     }
+
     const Login = async () => {
         const data = await axios({
-            method: 'get',
-            url: url + 'admin-details',
-            params:{
-                'login':login,
-                'password':password
-            }
+            method: "get",
+            url: url + "admin-details",
+            params: {
+                login: login,
+                password: password,
+            },
         });
-        console.log('login', data);
-        if(data.data.status == 200){
-            localStorage.setItem('adminToken', data.data.user[0].id);
-            window.location.href = '/admin-console';
-        }else{
-            message.error('Неправильный логин или пароль!', 3);
+        console.log("login", data);
+        if (data.data.status === 200) {
+            localStorage.setItem("adminToken", data.data.user[0].id);
+            window.location.href = "/admin-console";
+        } else {
+            setSnackbarMessage("Неправильный логин или пароль!"); // Set error message
+            setOpenSnackbar(true); // Show Snackbar
         }
-    }
+    };
+
     return (
-        <div className="container">
-            <div className="col-12 d-flex justify-content-center">
-                <div className="col-6 bg-info p-5" style={{marginTop : "150px"}}>
-                    <h3 className="text-center text-white">Вход в Админ</h3>
-                    <input className="form-control" type="text" placeholder="Логин" onChange={(e)=>setLogin(e.target.value)} />
-                    <br />
-                    <input className="form-control" type="text" placeholder="Пароль" onChange={(e)=>setPassword(e.target.value)} />
-                    <br />
-                    <button className="btn btn-light" onClick={Login}>
-                        Войти
-                    </button>
-                </div>
-            </div>
-        </div>
+        <Container maxWidth="sm" sx={{ marginTop: "150px" }}>
+            <Box sx={{ backgroundColor: "#2196f3", padding: 5, borderRadius: 1 }}>
+                <Typography variant="h5" align="center" color="white" gutterBottom>
+                    Вход в Админ
+                </Typography>
+                <TextField
+                    fullWidth
+                    variant="outlined"
+                    margin="normal"
+                    label="Логин"
+                    onChange={(e) => setLogin(e.target.value)}
+                />
+                <TextField
+                    fullWidth
+                    variant="outlined"
+                    margin="normal"
+                    label="Пароль"
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <Button variant="contained" color="secondary" fullWidth onClick={Login}>
+                    Войти
+                </Button>
+            </Box>
+
+            {/* Snackbar for error message */}
+            <Snackbar
+                open={openSnackbar}
+                autoHideDuration={3000}
+                onClose={() => setOpenSnackbar(false)}
+            >
+                <Alert onClose={() => setOpenSnackbar(false)} severity="error" sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
+        </Container>
     );
-}
+};
+
 export default Admin;

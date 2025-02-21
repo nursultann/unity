@@ -3,242 +3,187 @@ import Footer from "../components/footer";
 import Header from "../components/header";
 import axios from "axios";
 import { url } from "../global_variables/variables";
+import {
+    Container,
+    Box,
+    Grid,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    TextField,
+    Button,
+    Paper,
+    Typography,
+} from "@mui/material";
+
 const Main = () => {
     const local = localStorage.getItem('token');
     const [userDetails, setUserDetails] = useState(null);
     const [tableData, setTableData] = useState(null);
+    const [searchResult, setSearchResult] = useState(null);
+    const [painment, setPainment] = useState(null);
+
     const pageTo = (url) => {
         window.location.href = url;
     }
+
     const checkLogged = async () => {
-        if (local == null) {
+        if (!local) {
             setUserDetails(null);
             window.location.href = '/';
         } else {
-            const data = await axios({
-                url: url + 'user-details',
-                method: 'get',
-                params: {
-                    uid: local,
+            try {
+                const data = await axios.get(`${url}user-details`, { params: { uid: local } });
+                if (data.data.status === 200) {
+                    setUserDetails(data.data.user[0]);
                 }
-            });
-            console.log('local', data);
-            if (data.data.status === 200) {
-                setUserDetails(data.data.user[0]);
+            } catch (error) {
+                console.error("Error fetching user details:", error);
             }
         }
     }
+
+    const getTableDetails = async () => {
+        try {
+            const data = await axios.get(`${url}table-users`);
+            if (data.data.status === 200) {
+                setTableData(data.data.users);
+            }
+        } catch (error) {
+            console.error("Error fetching table data:", error);
+        }
+    }
+
+    const getPainmentReports = async () => {
+        try {
+            const data = await axios.get(`${url}report-painment`);
+            if (data.data.status === 200) {
+                setPainment(data.data.report_painment);
+            }
+        } catch (error) {
+            console.error("Error fetching painment reports:", error);
+        }
+    }
+
+    const search = (value) => {
+        const results = tableData?.filter((user) =>
+            user.name.toLowerCase().includes(value.toLowerCase()) ||
+            user.lastname.toLowerCase().includes(value.toLowerCase())
+        );
+        setSearchResult(results?.length > 0 ? results : null);
+    }
+
     useEffect(() => {
         checkLogged();
     }, []);
-    const getTableDetails = async () => {
-        const data = await axios({
-            method: 'get',
-            url: url + 'table-users',
-        });
-        console.log('table data', data);
-        if (data.data.status === 200) {
-            setTableData(data.data.users);
-            let arr = [];
-            for (let i = 0; i < data.data.users.length; i++) {
-                arr = [];
-            }
-        }
-    }
+
     useEffect(() => {
         getTableDetails();
         getPainmentReports();
     }, []);
-    const [searchResult, setSearchResult] = useState(null);
-    const Search = (value) => {
-        const search = tableData.filter((i) => i.name == value || i.lastname == value || i.name.toLowerCase() == value || i.lastname.toLowerCase() == value);
-        if (search.length > 0) {
-            setSearchResult(search);
-        } else {
-            setSearchResult(null);
-        }
-    }
-    const [painment, setPainment] = useState(null);
-    const getPainmentReports = async () => {
-        const data = await axios({
-            method: 'get',
-            url: url + 'report-painment'
-        });
-        if (data.data.status === 200) {
-            setPainment(data.data.report_painment);
-        } else {
-            setPainment(null);
-        }
-    }
 
     return (
         <>
             <Header />
-            <div className="row">
-                <div className="col-12 bg-secondary-subtle p-lg-4">
-                    <div className="row mx-0">
-                        <div className="col-lg-8 p-1">
-                            <div className="row">
-                                <div className="col-12 p-3 px-lg-0">
-                                    Бул тизмеге турак-жай кыймылсыз мүлк алуу үчүн кезекте турган жарандар кирет.
-                                    Кезекке туруу үчүн сиздин атыңызда кыймылсыз мүлктүн жоктугун тастыктаган маалымкат керек.
-                                    Үй-бүлөлүү болсоңуз, нике күбөлүгү талап кылынат.
-                                </div>
-                                <div className="col-12 py-4">
-                                    <input type="search" placeholder="Издөө" className="form-control" onChange={(e) => { Search(e.target.value) }} name="" id="" />
-                                </div>
-                                {searchResult != null ?
-                                    <>
-                                        <div className="col-12">
-                                            <table className="list">
-                                                <tr>
-                                                    <th>
-                                                        Аты жөнү
-                                                    </th>
-                                                    <th>
-                                                        Кызмат көрсөтүүгө болгон төлөм
-                                                    </th>
-                                                    <th>
-                                                        Негизги эсеп
-                                                    </th>
-                                                    <th>
-                                                        Кезегиңизди аныктоочу эсебиңиз
-                                                    </th>
-                                                </tr>
-                                                {searchResult.map((item) =>
-                                                    <>
-                                                        {item.status == 2 ?
-                                                            <tr>
-                                                                <td className="bg-success-subtle">{item.lastname + ' ' + item.name + ' ' + (item.middname !== undefined ? item.middname : '')}
-                                                                    <span style={{ fontSize: '6pt', float: 'inline-end' }} className="text-muted">{item.date_registr}</span></td>
-                                                                <td className="bg-secondary-subtle">2000</td>
-                                                                <td>20000</td>
-                                                                <td className="bg-secondary-subtle">{item.balance}</td>
-                                                            </tr>
-                                                            :
-                                                            <tr>
-                                                                <td>{item.lastname + ' ' + item.name + ' ' + (item.middname !== undefined ? item.middname : '')}
-                                                                    <span style={{ fontSize: '6pt', float: 'inline-end' }} className="text-muted">{item.date_registr}</span></td>
-                                                                <td className="bg-secondary-subtle">2000</td>
-                                                                <td>20000</td>
-                                                                <td className="bg-secondary-subtle">{item.balance}</td>
-                                                            </tr>
-                                                        }
-                                                    </>
-                                                )
-                                                }
-                                            </table>
-                                        </div>
-                                    </>
-                                    :
-                                    <>
-                                    </>
-                                }
-                                <div className="col-12 mt-3">
-                                    <table className="list">
-                                        <tr>
-                                            <th className="table-name">
-                                                Аты жөнү
-                                            </th>
-                                            <th className="bg-secondary-subtle">
-                                                Кызмат көрсөтүүгө <br /> болгон төлөм
-                                            </th>
-                                            <th>
-                                                Негизги эсеп
-                                            </th>
-                                            <th className="bg-secondary-subtle">
-                                                Кезегиңизди аныктоочу <br /> эсебиңиз
-                                            </th>
-                                        </tr>
-                                        {tableData != null ?
-                                            <>
-                                                {tableData.map((item) =>
-                                                    <>
-                                                        {item.status == 2 ?
-                                                            <tr>
-                                                                <td style={{ width: '30%' }} className="bg-success-subtle">{item.lastname + ' ' + item.name + ' ' + (item.middname !== undefined ? item.middname : '')}
-                                                                    <span style={{ fontSize: '6pt', float: 'inline-end' }} className="text-muted">{item.date_registr}</span></td>
-                                                                <td className="bg-secondary-subtle">2000</td>
-                                                                <td>20000</td>
-                                                                <td className="bg-secondary-subtle">{item.balance}</td>
-                                                            </tr>
-                                                            :
-                                                            <tr>
-                                                                <td style={{ width: '30%' }}>{item.lastname + ' ' + item.name + ' ' + (item.middname !== undefined ? item.middname : '')}
-                                                                    <span style={{ fontSize: '6pt', float: 'inline-end' }} className="text-muted">{item.date_registr}</span></td>
-                                                                <td className="bg-secondary-subtle">2000</td>
-                                                                <td>20000</td>
-                                                                <td className="bg-secondary-subtle">{item.balance}</td>
-                                                            </tr>
-                                                        }
-                                                    </>
-                                                )
-                                                }
-                                            </>
-                                            :
-                                            <>
-                                            </>
-                                        }
-                                    </table>
-                                    {userDetails != null ?
-                                        <>
-                                            {userDetails.status == 0 ?
-                                                <button onClick={() => pageTo('/edit')} className="col-12 mt-3 btn btn-light rounded-pill">
-                                                    Тизмеге кошулуу
-                                                </button>
-                                                : <></>
-                                            }
-                                        </>
-                                        :
-                                        <></>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 pe-4 pe-lg-0 ps-4 ps-lg-5">
-                            <div className="row mt-3">
-                                <div className="col-12">
-                                    <p>Платформа аркылуу кыймылсыз мүлккө ээ болгон
-                                        жарандардын тизмеси
-                                    </p>
-                                </div>
-                                <div className="col-12">
-                                    <input type="search" placeholder="Издөө" className="form-control" src="" alt="" />
-                                </div>
-                                <div className="col-12 py-4">
-                                    <table className="list">
-                                        <tr>
-                                            <th>
-                                                №
-                                            </th>
-                                            <th>
-                                                ФИО
-                                            </th>
-                                        </tr>
-                                        {painment != null ?
-                                            <>
-                                                {painment.map((item) =>
-                                                    <tr>
-                                                        <td>{item.id}</td>
-                                                        <td>{item.lastname + ' ' + item.name}</td>
-                                                    </tr>
-                                                )
-                                                }
-
-                                            </>
-                                            :
-                                            <>
-                                            </>
-                                        }
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Container maxWidth="lg" sx={{ py: 4 }}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} lg={8}>
+                        <Paper elevation={3} sx={{ p: 3, mb: 2 }}>
+                            <Typography variant="body1">
+                                Бул тизмеге турак-жай кыймылсыз мүлк алуу үчүн кезекте турган жарандар кирет. 
+                                Кезекке туруу үчүн сиздин атыңызда кыймылсыз мүлктүн жоктугун тастыктаган маалымкат керек.
+                            </Typography>
+                            <TextField
+                                fullWidth
+                                label="Издөө"
+                                variant="outlined"
+                                onChange={(e) => search(e.target.value)}
+                                sx={{ mt: 3 }}
+                            />
+                        </Paper>
+                        <TableContainer component={Paper} elevation={3} sx={{ mb: 3 }}>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Аты жөнү</TableCell>
+                                        <TableCell>Кызмат көрсөтүүгө болгон төлөм</TableCell>
+                                        <TableCell>Негизги эсеп</TableCell>
+                                        <TableCell>Кезегиңизди аныктоочу эсебиңиз</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {(searchResult || tableData)?.map((item, index) => (
+                                        <TableRow 
+                                            key={index} 
+                                            sx={{ 
+                                                bgcolor: item.status == 2 ? '#C8E6C9' : 'background.paper' 
+                                            }}
+                                        >
+                                            <TableCell>
+                                                {item.lastname} {item.name} {item.middname || ''}
+                                                <Typography variant="caption" display="block" color="textSecondary">
+                                                    {item.date_registr}
+                                                </Typography>
+                                            </TableCell>
+                                            <TableCell>2000</TableCell>
+                                            <TableCell>20000</TableCell>
+                                            <TableCell>{item.balance}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        {userDetails?.status === 0 && (
+                            <Button
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                onClick={() => pageTo('/edit')}
+                                sx={{ mt: 2 }}
+                            >
+                                Тизмеге кошулуу
+                            </Button>
+                        )}
+                    </Grid>
+                    <Grid item xs={12} lg={4}>
+                        <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
+                            <Typography variant="body1" gutterBottom>
+                                Платформа аркылуу кыймылсыз мүлккө ээ болгон жарандардын тизмеси
+                            </Typography>
+                            <TextField
+                                fullWidth
+                                label="Издөө"
+                                variant="outlined"
+                                sx={{ mb: 3 }}
+                            />
+                            <TableContainer component={Paper}>
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>№</TableCell>
+                                            <TableCell>ФИО</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {painment?.map((item, index) => (
+                                            <TableRow key={index}>
+                                                <TableCell>{item.id}</TableCell>
+                                                <TableCell>{item.lastname} {item.name}</TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </Container>
             <Footer />
         </>
     );
 }
+
 export default Main;

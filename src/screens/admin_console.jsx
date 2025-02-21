@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { url } from "../global_variables/variables";
-import { message } from "antd";
-import { Button, Modal } from 'antd';
+import { Dialog } from "@mui/material";
 const AdminConsole = () => {
     const [user, setUser] = useState();
     const [table, setTable] = useState(null);
@@ -39,10 +38,10 @@ const AdminConsole = () => {
             }
         });
         if (data.data.status == 200) {
-            message.success('Успешно опубликовано видео!');
+            alert('Успешно опубликовано видео!');
             getVideos();
         } else {
-            message.error('Не получилось опубликовать видео!');
+            alert('Не получилось опубликовать видео!');
         }
     }
     const getVideos = async () => {
@@ -65,10 +64,10 @@ const AdminConsole = () => {
             }
         });
         if (data.data.status == 200) {
-            message.success('Успешно видео удалено!');
+            alert('Успешно видео удалено!');
             getVideos();
         } else {
-            message.error('Не удалось удалить видео!');
+            alert('Не удалось удалить видео!');
         }
     }
     //photo
@@ -84,10 +83,10 @@ const AdminConsole = () => {
             });
             console.log('post photo', data);
             if (data.data.status == 200) {
-                message.success('Успешно опубликовано фото!');
+                alert('Успешно опубликовано фото!');
                 getPhotos();
             } else {
-                message.error('Не получилось опубликовать фото!');
+                alert('Не получилось опубликовать фото!');
             }
         }
     }
@@ -114,10 +113,10 @@ const AdminConsole = () => {
         });
         console.log('delete photo', data);
         if (data.data.status == 200) {
-            message.success('Успешно фото удалено!');
+            alert('Успешно фото удалено!');
             getPhotos();
         } else {
-            message.error('Не удалось удалить фото!');
+            alert('Не удалось удалить фото!');
         }
     }
     //
@@ -214,7 +213,7 @@ const AdminConsole = () => {
         if (data.data.status == 200) {
             changeMainBalance1();
         } else {
-            message.warning('Заполните все поля!');
+            alert('Заполните все поля!');
         }
     }
     const changeMainBalance1 = async () => {
@@ -229,9 +228,9 @@ const AdminConsole = () => {
         console.log('params changeMainBalanceAdd',params);
         console.log('changeMainBalanceAdd', data);
         if (data.data.status == 200) {
-            message.success('Успешно!');
+            alert('Успешно!');
         } else {
-            message.error('Что-то пошло не так!');
+            alert('Что-то пошло не так!');
         }
     }
     useEffect(()=>{
@@ -273,7 +272,7 @@ const AdminConsole = () => {
         if (data.data.status == 200) {
             changeStatus(id);
         } else {
-            message.warning('Заполните все поля!');
+            alert('Заполните все поля!');
         }
     }
     const changeStatus = async (id) => {
@@ -287,7 +286,7 @@ const AdminConsole = () => {
         if (data.data.status == 200) {
             changeMainBalance();
         } else {
-            message.warning('Что-то пошло не так!');
+            alert('Что-то пошло не так!');
         }
     }
     const changeMainBalance = async (id) => {
@@ -296,9 +295,9 @@ const AdminConsole = () => {
             url: url + 'report-painment',
         });
         if (data.data.status == 200) {
-            message.success('Успешно!');
+            alert('Успешно!');
         } else {
-            message.error('Что-то пошло не так!');
+            alert('Что-то пошло не так!');
         }
     }
     //report service painment
@@ -326,7 +325,7 @@ const AdminConsole = () => {
             UpdateServicePainment();
             getReports();
         } else {
-            message.warning('Что-то пошло не так :(');
+            alert('Что-то пошло не так :(');
         }
     }
     const UpdateServicePainment = async () => {
@@ -335,9 +334,9 @@ const AdminConsole = () => {
             url: url + 'report'
         })
         if (data.data.status == 200) {
-            message.success('Отчет по обслуживанию сделан!');
+            alert('Отчет по обслуживанию сделан!');
         } else {
-            message.error('Не удалось сделать отчет!');
+            alert('Не удалось сделать отчет!');
         }
     }
     const changeUserStatus = async (id,type) => {
@@ -351,10 +350,10 @@ const AdminConsole = () => {
         });
         console.log('data user status ', data);
         if (data.data.status == 200) {
-            message.success('Успешно!');
+            alert('Успешно!');
             fetchUsers();
         } else {
-            message.error('Что-то пошло не так!');
+            alert('Что-то пошло не так!');
         }
     }
     return (
@@ -573,7 +572,7 @@ const AdminConsole = () => {
                     </div>
                 </div>
             </div>
-            <Modal title="Добавить в отчет" open={isModalOpen} footer={null} onOk={handleOk} onCancel={handleCancel}>
+            <Dialog title="Добавить в отчет" open={isModalOpen} footer={null} onOk={handleOk} onClose={handleCancel} fullWidth>
                 <div className="col-12 p-4">
                     <h6 className="text-center">Адрес</h6>
                     <input type="text" className="form-control mb-2" placeholder="Область" onChange={(e) => setRegion(e.target.value)} />
@@ -593,8 +592,8 @@ const AdminConsole = () => {
                         </button>
                     </div>
                 </div>
-            </Modal>
-            <Modal title="Добавить платеж" open={isModalOpen1} footer={null} onOk={handleOk1} onCancel={handleCancel1}>
+            </Dialog>
+            <Dialog title="Добавить платеж" open={isModalOpen1} footer={null} onOk={handleOk1} onClose={handleCancel1} fullWidth>
                 <div className="col-12 p-4">
                     <h6 className="text-center">Добавить платеж</h6>
                     <input type="text" className="form-control mb-2" placeholder="Имя" onChange={(e) => setName(e.target.value)} />
@@ -606,7 +605,7 @@ const AdminConsole = () => {
                         </button>
                     </div>
                 </div>
-            </Modal>
+            </Dialog>
         </div>
     )
 }

@@ -41,7 +41,7 @@ const Invoice = () => {
     return (
         <div className='p-3'>
             <Preview id={'jsx-template'} >
-                <div className="col-12 p-5 border border-danger" style={{ backgroundImage: 'url(' + back + ')', backgroundSize: 'cover' }}>
+                <div className="col-10 p-5 border border-danger" style={{ backgroundImage: 'url(' + back + ')', backgroundSize: 'cover' }}>
                     <div className="col-12 text-start mb-4">
                         Кыргыз Республикасынын жарандарын ыктыярдуу бирикмесинин негизинде турак жайлуу болуусун жеңил жол менен уюштуруучу
                         коммерциялык эмес системалуу кооперативтик компания <br />

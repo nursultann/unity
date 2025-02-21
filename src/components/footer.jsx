@@ -1,22 +1,27 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { url } from "../global_variables/variables";
-import { Modal } from "antd";
+import { Dialog, DialogTitle, DialogContent, DialogActions, Tabs, Tab, Table, TableBody, TableCell, TableHead, TableRow, Box, Button } from "@mui/material";
 import whatsapp from '../img/Ватсап.png';
 import gmail from '../img/почта жмайл.png';
 import mail from '../img/потча майл.png';
 import youtube from '../img/ютубе.png';
 const Footer = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const showModal = () => {
+    const [activeTab, setActiveTab] = useState(0);
+
+    const handleOpenModal = () => {
         setIsModalOpen(true);
     };
-    const handleOk = () => {
+
+    const handleCloseModal = () => {
         setIsModalOpen(false);
     };
-    const handleCancel = () => {
-        setIsModalOpen(false);
+
+    const handleTabChange = (event, newValue) => {
+        setActiveTab(newValue);
     };
+
     const [tableData, setTableData] = useState(null);
     const [painment1, setPainment1] = useState(null);
     const getPainmentReports1 = async () => {
@@ -125,7 +130,7 @@ const Footer = () => {
                                                 </div>
                                             </div>
                                             <div className="col-lg-6 text-center p-3">
-                                                <a className="btn btn-warning text-white px-4 p-0" onClick={showModal}>
+                                                <a className="btn btn-warning text-white px-4 p-0" onClick={handleOpenModal}>
                                                     Көзөмөл
                                                 </a>
                                             </div>
@@ -153,80 +158,92 @@ const Footer = () => {
                         </div>
                         : <></>
                     }
-                    <Modal title="" width={'80%'} open={isModalOpen} footer={null} onOk={handleOk} onCancel={handleCancel}>
-                        <div className="row">
-                            <div className="col-12 px-0">
-                                <nav>
-                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Компаниянын жалпы чыгымы</button>
-                                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Турак жай үчүн төлөнгөн төлөмдөрдүн көрсөткүчү</button>
-                                    </div>
-                                </nav>
-                            </div>
-                        </div>
-                        <div class="tab-content mt-3" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
-                                <table className="list">
-                                    {reports != null ?
-                                        <>
-                                            <tr>
-                                                <td>№</td>
-                                                <td>Дата</td>
-                                                <td>Кызмат көрсөтүүгө болгон төлөм</td>
-                                                <td>Салык 3%</td>
-                                                <td>Салык 3%</td>
-                                                <td>Кайрымдуулук 10%</td>
-                                            </tr>
-                                            {reports.map((item) =>
-                                                <tr>
-                                                    <td>{item.id}</td>
-                                                    <td>{item.date_of_report}</td>
-                                                    <td>{item.service_painment - (((item.service_painment) * 16) / 100)}</td>
-                                                    <td>{((item.service_painment) * 3) / 100}</td>
-                                                    <td>{((item.service_painment) * 3) / 100}</td>
-                                                    <td>{((item.service_painment) * 10) / 100}</td>
-                                                </tr>
-                                            )
-                                            }
-                                        </>
-                                        :
-                                        <>
-                                            <p className="text-center text-secondary p-3"> </p>
-                                        </>
-                                    }
-                                </table>
-                            </div>
-                            <div class="tab-pane fade mt-3" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                                <table className="list">
-                                    {painment1 != null ?
-                                        <>
-                                            <tr>
-                                                <td>ID</td>
-                                                <td>Дата</td>
-                                                <td>ФИО</td>
-                                                <td>Кызмат көрсөтүүгө болгон төлөм</td>
-                                                <td>Төлөм</td>
-                                            </tr>
-                                            {painment1.map((item) =>
-                                                <tr>
-                                                    <td>{item.id}</td>
-                                                    <td className="date">{item.date_of_amount}</td>
-                                                    <td>{item.lastname + ' ' + item.name + ' ' + (item.middname != undefined ? item.middname : '')}</td>
-                                                    <td>2000</td>
-                                                    <td>{item.sum}</td>
-                                                </tr>
-                                            )
-                                            }
+                    <Dialog open={isModalOpen} onClose={handleCloseModal} fullWidth maxWidth="lg">
+                        <DialogTitle>Көзөмөл</DialogTitle>
+                        <DialogContent>
+                            <Tabs value={activeTab} onChange={handleTabChange} indicatorColor="primary" textColor="primary" centered>
+                                <Tab label="Компаниянын жалпы чыгымы" />
+                                <Tab label="Турак жай үчүн төлөнгөн төлөмдөрдүн көрсөткүчү" />
+                            </Tabs>
 
-                                        </>
-                                        :
-                                        <>
-                                        </>
-                                    }
-                                </table>
-                            </div>
-                        </div>
-                    </Modal>
+                            <Box sx={{ marginTop: 3 }}>
+                                {activeTab === 0 && (
+                                    <Table>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>№</TableCell>
+                                                <TableCell>Дата</TableCell>
+                                                <TableCell>Кызмат көрсөтүүгө болгон төлөм</TableCell>
+                                                <TableCell>Салык 3%</TableCell>
+                                                <TableCell>Салык 3%</TableCell>
+                                                <TableCell>Кайрымдуулук 10%</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {reports != null ? (
+                                                reports.map((item) => (
+                                                    <TableRow key={item.id}>
+                                                        <TableCell>{item.id}</TableCell>
+                                                        <TableCell>{item.date_of_report}</TableCell>
+                                                        <TableCell>{item.service_painment - (item.service_painment * 16) / 100}</TableCell>
+                                                        <TableCell>{(item.service_painment * 3) / 100}</TableCell>
+                                                        <TableCell>{(item.service_painment * 3) / 100}</TableCell>
+                                                        <TableCell>{(item.service_painment * 10) / 100}</TableCell>
+                                                    </TableRow>
+                                                ))
+                                            ) : (
+                                                <TableRow>
+                                                    <TableCell colSpan={6} align="center">
+                                                        No data available
+                                                    </TableCell>
+                                                </TableRow>
+                                            )}
+                                        </TableBody>
+                                    </Table>
+                                )}
+
+                                {activeTab === 1 && (
+                                    <Table>
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>ID</TableCell>
+                                                <TableCell>Дата</TableCell>
+                                                <TableCell>ФИО</TableCell>
+                                                <TableCell>Кызмат көрсөтүүгө болгон төлөм</TableCell>
+                                                <TableCell>Төлөм</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {painment1 != null ? (
+                                                painment1.map((item) => (
+                                                    <TableRow key={item.id}>
+                                                        <TableCell>{item.id}</TableCell>
+                                                        <TableCell>{item.date_of_amount}</TableCell>
+                                                        <TableCell>{item.lastname + " " + item.name + " " + (item.middname ? item.middname : "")}</TableCell>
+                                                        <TableCell>2000</TableCell>
+                                                        <TableCell>{item.sum}</TableCell>
+                                                    </TableRow>
+                                                ))
+                                            ) : (
+                                                <TableRow>
+                                                    <TableCell colSpan={5} align="center">
+                                                        No data available
+                                                    </TableCell>
+                                                </TableRow>
+                                            )}
+                                        </TableBody>
+                                    </Table>
+                                )}
+                            </Box>
+                        </DialogContent>
+                        <DialogActions>
+                            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                                <Button onClick={handleCloseModal} type="primary" variant="contained">
+                                    Жабуу
+                                </Button>
+                            </Box>
+                        </DialogActions>
+                    </Dialog>
                     <div class="accordion accordion-flush d-block d-lg-none" id="accordionFlushExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
@@ -288,7 +305,7 @@ const Footer = () => {
                                     <h5 className="col-12 text-center text-danger">
                                         {tableData.main_sum}
                                     </h5>
-                                    <h6 className="col-12 text-center bg-secondary-subtle rounded" style={{fontSize:11}}>Негизги эсеп</h6>
+                                    <h6 className="col-12 text-center bg-secondary-subtle rounded" style={{ fontSize: 11 }}>Негизги эсеп</h6>
                                 </div>
                             </div>
                             <div className="col-6 p-3">
@@ -296,7 +313,7 @@ const Footer = () => {
                                     <h5 className="col-12 text-center">
                                         {(tableData.service_painment) - (((tableData.service_painment) * 16) / 100)}
                                     </h5>
-                                    <h6 className="col-12 text-center bg-secondary-subtle rounded" style={{fontSize:11}}>Кызмат көрсөтүүгө болгон төлөм</h6>
+                                    <h6 className="col-12 text-center bg-secondary-subtle rounded" style={{ fontSize: 11 }}>Кызмат көрсөтүүгө болгон төлөм</h6>
                                 </div>
                             </div>
                             <div className="col-4 p-2 pt-0">
@@ -304,7 +321,7 @@ const Footer = () => {
                                     <h5 className="col-12 text-center">
                                         {((tableData.service_painment) * 3) / 100}
                                     </h5>
-                                    <h6 className="col-12 text-center bg-secondary-subtle rounded" style={{fontSize:11}}>Салык 3%</h6>
+                                    <h6 className="col-12 text-center bg-secondary-subtle rounded" style={{ fontSize: 11 }}>Салык 3%</h6>
                                 </div>
                             </div>
                             <div className="col-4 p-2 pt-0">
@@ -312,7 +329,7 @@ const Footer = () => {
                                     <h5 className="col-12 text-center">
                                         {((tableData.service_painment) * 3) / 100}
                                     </h5>
-                                    <h6 className="col-12 text-center bg-secondary-subtle rounded" style={{fontSize:11}}>Салык 3%</h6>
+                                    <h6 className="col-12 text-center bg-secondary-subtle rounded" style={{ fontSize: 11 }}>Салык 3%</h6>
                                 </div>
                             </div>
                             <div className="col-4 p-2 pt-0">
@@ -320,8 +337,13 @@ const Footer = () => {
                                     <h5 className="col-12 text-center">
                                         {((tableData.service_painment) * 10) / 100}
                                     </h5>
-                                    <h6 className="col-12 text-center bg-secondary-subtle rounded" style={{fontSize:11}}>Кайрымдуулук 10%</h6>
+                                    <h6 className="col-12 text-center bg-secondary-subtle rounded" style={{ fontSize: 11 }}>Кайрымдуулук 10%</h6>
                                 </div>
+                            </div>
+                            <div className="col-lg-12 text-center p-3">
+                                <a className="btn btn-warning text-white px-4 p-0" onClick={handleOpenModal}>
+                                    Көзөмөл
+                                </a>
                             </div>
                         </div>
                     </div>

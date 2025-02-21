@@ -1,148 +1,135 @@
 import axios from "axios";
 import Footer from "../components/footer";
 import Header from "../components/header";
-import { message } from "antd";
 import { useEffect, useState } from "react";
 import { url } from "../global_variables/variables";
-import moment from "moment/moment";
-const Chat = () => {
-    const local = localStorage.getItem('token');
-    const [messages, setMessages] = useState([]);
-    const [user_name, setUserName] = useState();
-    const [userId, setUserId] = useState();
-    const [value, setValue] = useState();
-    const [userDetails, setUserDetails] = useState(null);
-    const checkLogged = async () => {
-        if (local == null) {
-            setUserDetails(null);
-            window.location.href = '/';
-        } else {
-            const data = await axios({
-                url: url + 'user-details',
-                method: 'get',
-                params: {
-                    uid: local,
-                }
-            });
-            if (data.data.status == 200) {
-                setUserDetails(data.data.user[0]);
-                setUserId(data.data.user[0].id);
-            }
-            console.log('local', data);
-        }
+import moment from "moment";
+import { Box, Button, Container, TextField, Typography, Paper, Avatar, Snackbar, Alert } from "@mui/material";
 
-    }
+const Chat = () => {
+    const local = localStorage.getItem("token");
+    const [messages, setMessages] = useState([]);
+    const [value, setValue] = useState("");
+    const [userDetails, setUserDetails] = useState(null);
+    const [openSnackbar, setOpenSnackbar] = useState(false);  // Snackbar visibility
+    const [snackbarMessage, setSnackbarMessage] = useState(""); // Snackbar message
+
+    const checkLogged = async () => {
+        if (!local) {
+            setUserDetails(null);
+            window.location.href = "/";
+        } else {
+            const data = await axios.get(`${url}user-details`, { params: { uid: local } });
+            if (data.data.status === 200) {
+                setUserDetails(data.data.user[0]);
+            }
+        }
+    };
     useEffect(() => {
         checkLogged();
+        getMessages();
     }, []);
     const getMessages = async () => {
-        const data = await axios({
-            method: 'get',
-            url: url + 'chats'
-        })
-        console.log('messages', data);
-        if (data.data.status == 200) {
+        const data = await axios.get(`${url}chats`);
+        if (data.data.status === 200) {
             setMessages(data.data.messages);
         }
-    }
-
+    };
     const postMessage = async () => {
         const params = {
             messages: value,
             user_id: userDetails.id,
             user_name: userDetails.name,
-
-        }
-        const data = await axios({
-            method: 'post',
-            url: url + 'chats',
-            params: params
-        })
-        console.log('messages', data);
-        if (data.data.status == 200) {
-            setValue('');
+        };
+        const data = await axios.post(`${url}chats`, null, { params });
+        if (data.data.status === 200) {
+            setValue("");
             getMessages();
-            message.success('Сообщение добавлено!', 5);
+            setSnackbarMessage("Сообщение добавлено!");
+            setOpenSnackbar(true);
         }
-    }
-    useEffect(() => {
-        getMessages();
-    }, []);
+    };
     return (
         <>
             <Header />
-            <div className="container px-4">
-                <div className="col-12 mt-3 mt-lg-0">
-                    <div className="row">
-                        <div className="col-12">
-                            <h4>Баарлашуу</h4>
-                        </div>
-                        <div
-                            className="col-12 bg-secondary-subtle p-5"
-                            style={{ height: '500px', overflowY: 'scroll' }}
-                        >
-                            <div className="row">
-                                {messages.length > 0 ?
-                                    <>
-                                        {messages.map((i) =>
-                                            <>
-                                                {i.user_id == userId ?
-                                                    <div className="col-12 d-flex justify-content-end">
-                                                        <span className="bg-white rounded mt-3 pt-0 p-3">
-                                                            <div className="text-end text-muted">
-                                                                <small className="text-info" style={{ fontSize: 10 }}>{i.user_name}</small>
-                                                            </div>
-                                                            <span style={{ fontSize: 13 }}>{i.message}</span>
-                                                            <br />
-                                                            <div className="text-end">
-                                                                <small className="text-muted" style={{ fontSize: 10 }}>{moment(i.date).calendar()}</small>
-                                                            </div>
-                                                        </span>
-                                                    </div>
-                                                    :
-                                                    <div className="col-12 d-flex justify-content-start">
-                                                        <span className="bg-white rounded mt-3 pt-0 p-3">
-                                                            <div className="text-start text-muted">
-                                                                <small className="text-info" style={{ fontSize: 10 }}>{i.user_name}</small>
-                                                            </div>
-                                                            <span style={{ fontSize: 13 }}>{i.message}</span>
-                                                            <br />
-                                                            <div className="text-start">
-                                                                <small className="text-muted" style={{ fontSize: 10 }}>{moment(i.date).calendar()}</small>
-                                                            </div>
-                                                        </span>
-                                                    </div>
-                                                }
-                                            </>
-                                        )
-                                        }
-                                    </>
-                                    : <></>
-                                }
-                            </div>
-                        </div>
-                        <div className="col-12 pt-3">
-                            <textarea
-                                onChange={(e) => setValue(e.target.value)}
-                                value={value}
-                                placeholder="Билдирүү калтырыңыз..."
-                                name=""
-                                id=""
-                                className="form-control"
-                                rows="10">
+            <Container maxWidth="md" sx={{ py: 4 }}>
+                <Typography variant="h4" align="center" gutterBottom>
+                    Баарлашуу
+                </Typography>
+                <Paper variant="outlined" sx={{ p: 3, height: "400px", overflowY: "auto", mb: 2 }}>
+                    {messages.length > 0 ? (
+                        messages.map((i) => (
+                            <Box
+                                key={i.id}
+                                display="flex"
+                                justifyContent={i.user_id === userDetails?.id ? "flex-end" : "flex-start"}
+                                mb={2}
+                            >
+                                <Box
+                                    component={Paper}
+                                    variant="outlined"
+                                    p={2}
+                                    sx={{
+                                        maxWidth: "60%",
+                                        bgcolor: i.user_id === userDetails?.id ? "primary.light" : "grey.200",
+                                    }}
+                                >
+                                    <Box display="flex" alignItems="center" mb={1}>
+                                        <Avatar sx={{ width: 24, height: 24, mr: 1 }}>
+                                            {i.user_name[0]}
+                                        </Avatar>
+                                        <Typography variant="caption" color="text.secondary">
+                                            {i.user_name}
+                                        </Typography>
+                                    </Box>
+                                    <Typography variant="body2" color="text.primary">
+                                        {i.message}
+                                    </Typography>
+                                    <Typography variant="caption" color="text.secondary" align={i.user_id === userDetails?.id ? "right" : "left"} display="block">
+                                        {moment(i.date).calendar()}
+                                    </Typography>
+                                </Box>
+                            </Box>
+                        ))
+                    ) : (
+                        <Typography color="text.secondary" align="center">
+                            No messages yet
+                        </Typography>
+                    )}
+                </Paper>
+                <TextField
+                    fullWidth
+                    multiline
+                    rows={4}
+                    variant="outlined"
+                    placeholder="Билдирүү калтырыңыз..."
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
+                    sx={{ mb: 2 }}
+                />
+                <Button
+                    onClick={postMessage}
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                >
+                    Билдирүү жөнөтүңүз
+                </Button>
 
-                            </textarea>
-                            <div className="col-12 d-flex justify-content-end">
-                                <button className="btn btn-primary mt-2 col-12" onClick={postMessage}>
-                                    Билдирүү жөнөтүңүз
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                {/* Snackbar for success message */}
+                <Snackbar
+                    open={openSnackbar}
+                    autoHideDuration={3000}
+                    onClose={() => setOpenSnackbar(false)}
+                >
+                    <Alert onClose={() => setOpenSnackbar(false)} severity="success" sx={{ width: "100%" }}>
+                        {snackbarMessage}
+                    </Alert>
+                </Snackbar>
+            </Container>
             <Footer />
         </>
-    )
-}
+    );
+};
+
 export default Chat;
